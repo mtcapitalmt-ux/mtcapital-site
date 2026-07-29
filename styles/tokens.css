@@ -1,0 +1,13 @@
+:root{
+  --navy:#192332; --navy-2:#1D2F44; --navy-3:#121A26;
+  --steel:#2C5370; --steel-2:#224256;
+  --gold:#A88458; --gold-lt:#C4A275;
+  --cream:#F5F1EA; --cream-2:#E6DFD3;
+  --line-d:rgba(245,241,234,.14);
+  --line-l:rgba(25,35,50,.16);
+  --serif:var(--font-serif),Georgia,serif;
+  --sans:var(--font-sans),system-ui,sans-serif;
+  --pad:clamp(20px,5vw,76px);
+  --sec:clamp(88px,12vh,164px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}

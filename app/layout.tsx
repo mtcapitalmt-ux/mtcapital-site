@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import localFont from "next/font/local";
+import "@/styles/tokens.css";
+import "@/styles/base.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const jost = localFont({
+  src: "./fonts/jost.woff2",
+  weight: "100 900",
+  display: "swap",
+  variable: "--font-sans",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const playfair = localFont({
+  src: [
+    { path: "./fonts/playfair.woff2", weight: "400 900", style: "normal" },
+    { path: "./fonts/playfair-italic.woff2", weight: "400 900", style: "italic" },
+  ],
+  display: "swap",
+  variable: "--font-serif",
 });
 
 export const metadata: Metadata = {
@@ -23,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${jost.variable} ${playfair.variable}`}>
       <body>{children}</body>
     </html>
   );
