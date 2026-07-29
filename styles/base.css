@@ -66,3 +66,8 @@ em.mark{font-style:italic;font-weight:400;color:var(--gold-lt)}
   body{font-size:16px}
   .foot-grid{grid-template-columns:1fr}
 }
+
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv,.rv-mask,[data-stagger]>*{opacity:1!important;transform:none!important;clip-path:none!important}
+}

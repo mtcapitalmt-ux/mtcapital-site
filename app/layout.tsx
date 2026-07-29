@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${jost.variable} ${playfair.variable}`}>
+    <html lang="pt-BR" className={`${jost.variable} ${playfair.variable}`}>
       <body>{children}</body>
     </html>
   );
