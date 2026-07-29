@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MT Capital — Assessoria em Leilão de Imóveis e Terrenos</title>
+<meta name="description" content="Assessoria em leilão de imóveis e terrenos. Lemos o processo, calculamos o custo real da operação e dizemos até quanto vale a pena pagar. Do edital ao registro da matrícula.">
+<meta property="og:title" content="MT Capital — Comprar bem começa antes do lance">
+<meta property="og:description" content="Comprar bem começa antes do lance. Analisamos o processo, calculamos o custo real e conduzimos tudo, do pregão ao registro.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MT CAPITAL — TOKENS (cores extraídas da identidade oficial)
+   ============================================================ */
+:root{
+  --navy:#192332; --navy-2:#1D2F44; --navy-3:#121A26;
+  --steel:#2C5370; --steel-2:#224256;
+  --gold:#A88458; --gold-lt:#C4A275;
+  --cream:#F5F1EA; --cream-2:#E6DFD3;
+  --line-d:rgba(245,241,234,.14);
+  --line-l:rgba(25,35,50,.16);
+  --serif:"Playfair Display",Georgia,serif;
+  --sans:"Jost",system-ui,sans-serif;
+  --pad:clamp(20px,5vw,76px);
+  --sec:clamp(88px,12vh,164px);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--navy);color:var(--cream);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit}
+::selection{background:var(--gold);color:var(--navy)}
+:focus-visible{outline:2px solid var(--gold-lt);outline-offset:3px}
+
+#smooth-wrapper{position:fixed;inset:0;height:100vh;overflow:hidden;z-index:1}
+#smooth-content{will-change:transform}
+body.no-smooth #smooth-wrapper{position:static;height:auto;overflow:visible}
+body.no-smooth #smooth-content{transform:none!important}
+
+/* ================= TIPOGRAFIA ================= */
+.eyebrow{font-weight:400;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:30px;height:1px;background:currentColor;flex:none;opacity:.7}
+.h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,6vw,5.1rem);line-height:1.06;letter-spacing:-.02em}
+.h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.85rem,4vw,3.2rem);line-height:1.12;letter-spacing:-.015em}
+.h3{font-family:var(--serif);font-weight:500;font-size:clamp(1.15rem,1.9vw,1.5rem);line-height:1.25}
+.h4{font-family:var(--serif);font-weight:500;font-size:1.08rem;line-height:1.3}
+em.mark{font-style:italic;font-weight:400;color:var(--gold-lt)}
+.lede{font-size:clamp(1rem,1.4vw,1.13rem);line-height:1.68;color:rgba(245,241,234,.72);max-width:56ch;font-weight:300}
+.label{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:400;color:var(--gold)}
+.tab{font-variant-numeric:tabular-nums}
+
+/* ================= NAV ================= */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:20px var(--pad);transition:background .45s var(--ease),padding .45s var(--ease)}
+.nav.stuck{background:rgba(25,35,50,.9);backdrop-filter:blur(16px);padding:13px var(--pad);border-bottom:1px solid var(--line-d)}
+.brand{display:flex;flex-direction:column;gap:3px;line-height:1}
+.brand b{font-family:var(--serif);font-weight:500;font-size:1.32rem;letter-spacing:.02em}
+.brand small{font-size:7.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:400}
+.nav-links{display:flex;gap:30px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:400}
+.nav-links a{color:rgba(245,241,234,.62);transition:color .25s}
+.nav-links a:hover{color:var(--gold-lt)}
+
+.btn{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;padding:14px 26px;border:1px solid var(--gold);background:var(--gold);color:var(--navy);transition:background .3s,color .3s,transform .3s var(--ease)}
+.btn:hover{background:var(--gold-lt);border-color:var(--gold-lt);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--cream);border-color:var(--line-d)}
+.btn-ghost:hover{background:rgba(245,241,234,.06);border-color:var(--gold);color:var(--gold-lt)}
+.btn svg{width:15px;height:15px;flex:none}
+
+/* ================= BANDA DIAGONAL ================= */
+.band{position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.band i{position:absolute;top:-40%;height:190%;width:38%;background:var(--navy-2);transform:skewX(-22deg);opacity:.55}
+.band i:nth-child(1){left:-14%}
+.band i:nth-child(2){left:56%;opacity:.32}
+.band-steel i{background:var(--steel-2)}
+.band-cream i{background:rgba(25,35,50,.045)}
+
+/* ================= HERO ================= */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--pad);overflow:hidden}
+.hero-inner{position:relative;z-index:2;padding:24vh 0 clamp(34px,6vh,64px);width:100%}
+.hero .eyebrow{margin-bottom:30px}
+.hero .h1{max-width:17ch}
+.hero-sub{margin-top:32px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:space-between}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.bignum{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-d)}
+.bignum div{padding:26px 22px 30px 0;border-right:1px solid var(--line-d)}
+.bignum div:last-child{border-right:0}
+.bignum .k{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3vw,2.5rem);line-height:1;color:var(--gold-lt)}
+.bignum .v{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,234,.5);margin-top:11px;font-weight:400}
+.scroll-cue{position:absolute;bottom:24px;right:var(--pad);z-index:3;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,234,.42);display:flex;align-items:center;gap:12px}
+.scroll-cue i{display:block;width:1px;height:36px;background:linear-gradient(var(--gold),transparent);animation:cue 2.4s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ================= SEÇÕES ================= */
+.section{padding:var(--sec) var(--pad);position:relative;overflow:hidden}
+.section > *{position:relative;z-index:1}
+.sec-steel{background:var(--steel)}
+.sec-navy2{background:var(--navy-2)}
+.sec-cream{background:var(--cream);color:var(--navy)}
+.sec-cream .lede{color:rgba(25,35,50,.68)}
+.sec-cream .eyebrow,.sec-cream .label{color:var(--steel)}
+.sec-cream em.mark{color:var(--gold)}
+.sec-cream .btn-ghost{color:var(--navy);border-color:var(--line-l)}
+.sec-cream .btn-ghost:hover{background:rgba(25,35,50,.05);color:var(--navy);border-color:var(--gold)}
+.sec-head{display:flex;flex-wrap:wrap;gap:34px;justify-content:space-between;align-items:flex-end;margin-bottom:clamp(44px,6.5vw,82px)}
+.sec-head .h2{max-width:18ch}
+.sec-head .eyebrow{margin-bottom:24px}
+
+/* ================= PILARES ================= */
+.pilares{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-d);border-block:1px solid var(--line-d)}
+.pilar{background:var(--navy);padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px}
+.pilar .label{margin-bottom:2px}
+.pilar p{font-size:.95rem;color:rgba(245,241,234,.66)}
+.pilar ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.pilar li{padding-left:20px;position:relative;font-size:.92rem;color:rgba(245,241,234,.66)}
+.pilar li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--gold)}
+
+/* ================= ESCLARECIMENTOS ================= */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,6vw,84px);align-items:start}
+.manifesto{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.22;max-width:20ch}
+.split-side p{color:rgba(245,241,234,.7)}
+.split-side p + p{margin-top:20px}
+.sec-cream .split-side p{color:rgba(25,35,50,.7)}
+.mitos{border-top:1px solid var(--line-l)}
+.mito{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(14px,3vw,50px);padding:30px 0;border-bottom:1px solid var(--line-l);align-items:start}
+.mito-q{font-family:var(--serif);font-weight:500;font-size:clamp(1.05rem,1.9vw,1.35rem);line-height:1.3}
+.mito-a{font-size:.96rem;color:rgba(25,35,50,.75)}
+.mito-a b{font-weight:500;color:var(--navy)}
+
+/* ================= ESPECIALIDADES ================= */
+.esp{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-l);border:1px solid var(--line-l)}
+.esp-card{background:var(--cream);padding:clamp(28px,3.2vw,42px);display:flex;flex-direction:column;gap:16px}
+.esp-card .num{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--gold)}
+.esp-card p{font-size:.94rem;color:rgba(25,35,50,.68)}
+.esp-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line-l)}
+.esp-card li{padding-left:20px;position:relative;font-size:.9rem;color:rgba(25,35,50,.72)}
+.esp-card li::before{content:"";position:absolute;left:0;top:.6em;width:9px;height:1px;background:var(--gold)}
+
+/* ================= ESTEIRA ================= */
+.esteira{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d)}
+.passo{background:var(--navy);padding:clamp(26px,2.8vw,36px);display:flex;flex-direction:column;gap:14px;transition:background .4s}
+.passo:hover{background:rgba(168,132,88,.05)}
+.passo.dest{background:var(--navy-2);border-top:2px solid var(--gold)}
+.passo-n{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--gold)}
+.passo p{font-size:.92rem;color:rgba(245,241,234,.66)}
+.passo .btn{margin-top:auto;align-self:flex-start}
+.esteira-nota{border:1px solid var(--line-d);border-top:0;padding:clamp(26px,3vw,38px);background:rgba(245,241,234,.02)}
+.esteira-nota p{font-size:.95rem;color:rgba(245,241,234,.66);max-width:78ch;margin-top:12px}
+
+/* ================= NOTA DE RODAPÉ DE SEÇÃO ================= */
+.sim-note{font-size:11.5px;line-height:1.7;color:rgba(25,35,50,.5);max-width:50ch}
+
+/* ================= PLANOS ================= */
+.planos{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.plano{border:1px solid var(--line-d);padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:18px;position:relative;transition:border-color .4s,background .4s}
+.plano:hover{border-color:var(--gold);background:rgba(168,132,88,.05)}
+.plano.dest{border-color:var(--gold)}
+.plano .tag{position:absolute;top:-1px;right:-1px;background:var(--gold);color:var(--navy);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;padding:7px 14px;font-weight:500}
+.plano .preco{font-family:var(--serif);font-weight:500;font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1;color:var(--gold-lt)}
+.plano .preco small{font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,241,234,.5);display:block;margin-top:10px;font-weight:400}
+.plano ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-top:4px}
+.plano li{padding-left:22px;position:relative;font-size:.94rem;color:rgba(245,241,234,.72)}
+.plano li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--gold)}
+.plano .btn{margin-top:auto;align-self:flex-start}
+
+/* ================= ETAPAS ================= */
+.etapas{border-top:1px solid var(--line-d)}
+.etapa{display:grid;grid-template-columns:64px 1fr 1.35fr;gap:clamp(14px,3vw,44px);padding:32px 0;border-bottom:1px solid var(--line-d);align-items:start;transition:background .4s}
+.etapa:hover{background:rgba(245,241,234,.03)}
+.etapa-n{font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--gold);padding-top:2px}
+.etapa p{color:rgba(245,241,234,.62);font-size:.94rem;max-width:60ch}
+
+/* ================= OPORTUNIDADES ================= */
+.ops-list{border-top:1px solid var(--line-d)}
+.op{position:relative;display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center;padding:clamp(22px,3vw,34px) 0;border-bottom:1px solid var(--line-d);cursor:pointer;transition:padding-left .45s var(--ease)}
+.op:hover{padding-left:20px}
+.op::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--ease)}
+.op:hover::before{transform:scaleY(1);transform-origin:top}
+.op-main{display:flex;flex-direction:column;gap:9px;min-width:0}
+.op-title{font-family:var(--serif);font-weight:500;font-size:clamp(1.3rem,2.7vw,2.1rem);line-height:1.1;transition:color .3s}
+.op:hover .op-title{color:var(--gold-lt)}
+.op-meta{display:flex;flex-wrap:wrap;gap:18px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.45)}
+.op-right{text-align:right;display:flex;flex-direction:column;gap:7px;align-items:flex-end}
+.op-price{font-family:var(--serif);font-size:clamp(1rem,1.6vw,1.3rem);font-variant-numeric:tabular-nums}
+.op-off{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.op-float{position:fixed;top:0;left:0;width:300px;height:200px;z-index:60;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.92);transition:opacity .35s var(--ease),transform .35s var(--ease);overflow:hidden;background:var(--navy-2)}
+.op-float.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.op-float img{width:100%;height:100%;object-fit:cover}
+.ops-empty{border:1px solid var(--line-d);padding:clamp(34px,5.5vw,64px);display:flex;flex-direction:column;align-items:flex-start;gap:20px;background:rgba(245,241,234,.02)}
+.ops-empty p{color:rgba(245,241,234,.6);max-width:54ch}
+
+/* ================= CASOS ================= */
+.casos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.caso{border:1px solid var(--line-d);display:flex;flex-direction:column;overflow:hidden}
+.caso-img{aspect-ratio:4/3;background:var(--navy);position:relative;overflow:hidden;display:grid;place-items:center}
+.caso-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.caso:hover .caso-img img{transform:scale(1.05)}
+.caso-ph{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(245,241,234,.28)}
+.caso-body{padding:26px 24px 28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.caso-nums{display:flex;flex-wrap:wrap;gap:18px 26px;margin-top:auto;padding-top:18px;border-top:1px solid var(--line-d)}
+.caso-nums div{display:flex;flex-direction:column;gap:5px}
+.caso-nums span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.42)}
+.caso-nums b{font-family:var(--serif);font-weight:500;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.caso-nums .up b{color:var(--gold-lt)}
+.caso p{font-size:.92rem;color:rgba(245,241,234,.65)}
+
+/* ================= RESULTADOS ================= */
+.res-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d);margin-bottom:34px}
+.res-strip div{background:var(--navy-2);padding:22px 20px}
+.res-strip .k{font-family:var(--serif);font-weight:500;font-size:clamp(1.3rem,2.3vw,1.9rem);line-height:1;color:var(--gold-lt);font-variant-numeric:tabular-nums}
+.res-strip .v{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,234,.45);margin-top:10px}
+.res-filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.res-filtros button{background:none;border:1px solid var(--line-d);padding:9px 18px;cursor:pointer;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,241,234,.6);transition:all .3s var(--ease)}
+.res-filtros button:hover{border-color:var(--gold);color:var(--gold-lt)}
+.res-filtros button.on{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:500}
+.caso-lucro{display:flex;align-items:baseline;gap:10px;padding:14px 0 0;margin-top:14px;border-top:1px solid var(--line-d)}
+.caso-lucro b{font-family:var(--serif);font-weight:500;font-size:1.35rem;color:var(--gold-lt);font-variant-numeric:tabular-nums}
+.caso-lucro span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.45)}
+.caso-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--navy);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;font-weight:500;z-index:2}
+.caso-img{position:relative}
+.casos-vazio{border:1px solid var(--line-d);padding:clamp(30px,5vw,54px);color:rgba(245,241,234,.55)}
+
+/* ================= DEPOIMENTOS ================= */
+.depos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.depo{border:1px solid var(--line-l);padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;gap:20px}
+.depo .aspas{font-family:var(--serif);font-size:3rem;line-height:.6;color:var(--gold);height:24px}
+.depo blockquote{font-size:.95rem;line-height:1.7;color:rgba(25,35,50,.75);flex:1}
+.depo footer{margin-top:auto;padding-top:18px;border-top:1px solid var(--line-l);background:none;padding-inline:0}
+.depo cite{font-style:normal;font-family:var(--serif);font-weight:500;font-size:1.02rem;display:block;color:var(--navy)}
+.depo small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);display:block;margin-top:6px}
+
+/* ================= SÓCIOS ================= */
+.socios{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.socio{display:grid;grid-template-columns:150px 1fr;gap:26px;border:1px solid var(--line-d);padding:26px;align-items:start}
+.socio-foto{aspect-ratio:3/4;background:var(--navy-3);display:grid;place-items:center;overflow:hidden}
+.socio-foto img{width:100%;height:100%;object-fit:cover}
+.socio-foto span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,241,234,.28);text-align:center;padding:8px}
+.socio-body{display:flex;flex-direction:column;gap:12px}
+.socio-body p{font-size:.93rem;color:rgba(245,241,234,.66)}
+
+/* ================= CAPTURA ================= */
+.captura{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.cap-form{display:flex;flex-direction:column;gap:16px}
+.cap-form input{background:transparent;border:0;border-bottom:1px solid var(--line-d);padding:14px 2px;font-size:1rem;font-weight:300;transition:border-color .3s}
+.cap-form input::placeholder{color:rgba(245,241,234,.38)}
+.cap-form input:focus{outline:none;border-color:var(--gold)}
+.cap-form .btn{align-self:flex-start;margin-top:12px}
+.cap-msg{font-size:11.5px;color:var(--gold-lt);min-height:18px}
+.cap-note{font-size:11px;line-height:1.7;color:rgba(245,241,234,.4);max-width:46ch}
+
+/* ================= FAQ ================= */
+.faq{border-top:1px solid var(--line-d);max-width:940px}
+.faq-item{border-bottom:1px solid var(--line-d)}
+.faq-q{width:100%;background:none;border:0;text-align:left;cursor:pointer;padding:27px 46px 27px 0;position:relative;font-family:var(--serif);font-weight:500;font-size:clamp(1.05rem,1.8vw,1.32rem);line-height:1.3;transition:color .3s}
+.faq-q:hover{color:var(--gold-lt)}
+.faq-q::after{content:"";position:absolute;right:6px;top:50%;width:14px;height:1px;background:var(--gold)}
+.faq-q::before{content:"";position:absolute;right:12.5px;top:50%;width:1px;height:14px;background:var(--gold);transform:translateY(-50%);transition:transform .4s var(--ease)}
+.faq-item.open .faq-q::before{transform:translateY(-50%) scaleY(0)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .5s var(--ease)}
+.faq-a p{padding:0 0 30px;color:rgba(245,241,234,.66);max-width:68ch;font-size:.95rem}
+
+/* ================= CTA / FOOTER ================= */
+.cta{position:relative;text-align:center;padding:clamp(96px,14vh,172px) var(--pad);overflow:hidden;background:var(--steel)}
+.cta .eyebrow{justify-content:center;margin-bottom:26px;color:var(--gold-lt)}
+.cta .h2{margin:0 auto;max-width:20ch}
+.cta .lede{margin:26px auto 38px;text-align:center;color:rgba(245,241,234,.78)}
+.cta > *{position:relative;z-index:1}
+footer.site{padding:60px var(--pad) 34px;background:var(--navy-3);border-top:1px solid var(--line-d)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;padding-bottom:48px}
+.foot-grid h4{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:400}
+.foot-grid a,.foot-grid p{display:block;color:rgba(245,241,234,.58);font-size:.92rem;margin-bottom:10px;transition:color .25s}
+.foot-grid a:hover{color:var(--gold-lt)}
+.foot-bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;padding-top:28px;border-top:1px solid var(--line-d);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.34)}
+.disclaimer{font-size:10.5px;line-height:1.85;color:rgba(245,241,234,.3);max-width:88ch;margin-top:20px}
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:90;width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;box-shadow:0 12px 36px rgba(0,0,0,.45);transition:transform .35s var(--ease)}
+.wa-float:hover{transform:scale(1.09)}
+.wa-float svg{width:28px;height:28px}
+
+/* ================= REVEALS ================= */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .95s var(--ease),transform .95s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv-mask{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s var(--ease)}
+.rv-mask.in{clip-path:inset(0 0 0 0)}
+[data-stagger]>*{opacity:0;transform:translateY(24px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
+[data-stagger].in>*{opacity:1;transform:none}
+
+/* ================= RESPONSIVO ================= */
+@media(max-width:1080px){
+  .split,.captura{grid-template-columns:1fr}
+  .planos,.casos,.pilares,.esp,.depos,.socios{grid-template-columns:1fr}
+  .esteira{grid-template-columns:1fr 1fr}
+  .res-strip{grid-template-columns:1fr 1fr}
+  .bignum{grid-template-columns:1fr 1fr}
+  .bignum div{border-bottom:1px solid var(--line-d)}
+  .bignum div:nth-child(2n){border-right:0}
+  .etapa{grid-template-columns:48px 1fr}
+  .etapa p{grid-column:2}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  body{font-size:16px}
+  .nav-links,.scroll-cue,.op-float{display:none}
+  .mito,.socio,.esteira{grid-template-columns:1fr;gap:12px}
+  .esteira{gap:1px}
+  .socio-foto{max-width:180px}
+  .op{grid-template-columns:1fr}
+  .op-right{text-align:left;align-items:flex-start;flex-direction:row;gap:16px}
+  .foot-grid{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .rv,.rv-mask,[data-stagger]>*{opacity:1!important;transform:none!important;clip-path:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand"><b>MT CAPITAL</b><small>Assessoria em Investimento e Negócios</small></a>
+  <nav class="nav-links">
+    <a href="#especialidades">Especialidades</a>
+    <a href="#processo">Como funciona</a>
+    <a href="#casos">Casos reais</a>
+    <a href="#guia">Guia gratuito</a>
+    <a href="#equipe">Quem somos</a>
+    <a href="#duvidas">Dúvidas</a>
+  </nav>
+  <a class="btn" href="#" data-wa="Olá! Vim pelo site da MT Capital e gostaria de falar com um especialista em leilão de imóveis.">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l1 2.3c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.2-.3.4-.1.7.2.3.8 1.4 1.8 2.3 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.2.5.2.5.4.1.1.1.6-.1 1.2z"/></svg>
+    Fale conosco
+  </a>
+</header>
+
+<div id="smooth-wrapper"><div id="smooth-content">
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="band"><i></i><i></i></div>
+  <div class="hero-inner">
+    <p class="eyebrow rv">Assessoria em leilão de imóveis e terrenos</p>
+    <h1 class="h1 rv">Comprar bem<br><em class="mark">começa antes do lance.</em></h1>
+    <div class="hero-sub">
+      <p class="lede rv">A MT Capital analisa o processo, calcula o custo real da operação e diz até quanto vale a pena pagar. Depois conduz tudo, do pregão ao registro.</p>
+      <div class="hero-cta rv">
+        <a class="btn" href="#" data-wa="Olá! Gostaria de agendar a reunião gratuita de diagnóstico.">Agendar reunião gratuita</a>
+        <a class="btn btn-ghost" href="#guia">Baixar o guia</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIG NUMBERS — calculados automaticamente a partir do array CASOS -->
+  <div class="bignum" data-stagger id="bignum">
+    <div><div class="k tab" id="bn-anos" data-count="0" data-suffix=" anos">0</div><div class="v">De atuação em leilões</div></div>
+    <div><div class="k tab" id="bn-ops" data-count="0" data-suffix="">0</div><div class="v">Operações concluídas</div></div>
+    <div><div class="k tab" id="bn-vol" data-count="0" data-prefix="R$ " data-suffix=" mi">R$ 0</div><div class="v">Em negócios acompanhados</div></div>
+    <div><div class="k tab" id="bn-desc" data-count="0" data-suffix="%">0%</div><div class="v">Maior desconto já entregue</div></div>
+  </div>
+  <div class="scroll-cue">Role<i></i></div>
+</section>
+
+<!-- ================= PILARES ================= -->
+<section class="section" style="padding-block:0">
+  <div class="pilares" data-stagger>
+    <div class="pilar">
+      <p class="label">Antes</p>
+      <h3 class="h3">Lemos o processo inteiro</h3>
+      <ul>
+        <li>Descobrimos por que o imóvel foi parar em leilão</li>
+        <li>Vemos quem mais tem direito sobre ele</li>
+        <li>Conferimos o que o edital obriga você a pagar</li>
+      </ul>
+    </div>
+    <div class="pilar">
+      <p class="label">Durante</p>
+      <h3 class="h3">Damos o lance com teto definido</h3>
+      <ul>
+        <li>Cuidamos do cadastro e da documentação</li>
+        <li>Acompanhamos o pregão na primeira e na segunda praça</li>
+        <li>Não passamos do valor que a conta permite</li>
+      </ul>
+    </div>
+    <div class="pilar">
+      <p class="label">Depois</p>
+      <h3 class="h3">Entregamos a matrícula no seu nome</h3>
+      <ul>
+        <li>Tiramos a carta de arrematação e pagamos o ITBI</li>
+        <li>Entramos com a imissão na posse quando precisa</li>
+        <li>Registramos o título no cartório</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESCLARECIMENTOS ================= -->
+<section class="section" id="sobre-leilao">
+  <div class="band"><i></i></div>
+  <div class="split">
+    <div>
+      <p class="eyebrow rv" style="margin-bottom:32px">Entenda o mercado</p>
+      <p class="manifesto rv-mask">O leilão popularizou. <em class="mark">E foi aí que ficou perigoso.</em></p>
+    </div>
+    <div class="split-side" data-stagger>
+      <p>Hoje qualquer pessoa entra num leilão pelo celular. O resultado é que milhares de iniciantes disputam os mesmos imóveis fáceis, sobem o lance na emoção e pagam caro por um desconto que já evaporou.</p>
+      <p>O retorno de verdade ficou onde exige análise técnica: processo complicado, imóvel ocupado, matrícula com pendência. É lá que o amador não vai — e é lá que a gente trabalha.</p>
+      <p>No fim da análise você recebe um documento com os riscos listados um a um, o custo real da operação somado e um número: até quanto vale a pena pagar por aquele imóvel.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MITOS ================= -->
+<section class="section sec-cream">
+  <div class="band band-cream"><i></i><i></i></div>
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Esclarecimentos</p>
+      <h2 class="h2 rv">O que se diz sobre leilão, <em class="mark">e o que a prática mostra.</em></h2>
+    </div>
+    <p class="lede rv">As dúvidas que mais afastam gente boa desse mercado.</p>
+  </div>
+  <div class="mitos" data-stagger>
+    <div class="mito">
+      <h4 class="mito-q">Leilão de imóveis é seguro?</h4>
+      <p class="mito-a">O Brasil teve cerca de 300 mil leilões em 2025, boa parte de imóveis retomados por bancos. Golpe não movimenta esse volume. O judicial corre dentro de um processo, pelo rito dos artigos 879 a 903 do CPC. O extrajudicial segue a Lei 9.514/97. <b>O risco não está na modalidade. Está em dar lance sem ler o processo.</b></p>
+    </div>
+    <div class="mito">
+      <h4 class="mito-q">O arrematante assume as dívidas do imóvel?</h4>
+      <p class="mito-a">Dívida de imposto, não. O STJ decidiu no Tema 1.134 que a arrematação é aquisição originária para fins tributários: o passivo antigo não vai junto. Condomínio é outra história e costuma acompanhar o imóvel. <b>Levantamos tudo antes e somamos ao custo da operação</b>, então você vê o total antes de decidir.</p>
+    </div>
+    <div class="mito">
+      <h4 class="mito-q">Preciso de muito dinheiro à vista?</h4>
+      <p class="mito-a">Menos do que você imagina. No leilão judicial dá para entrar com 25% e parcelar o restante em até 30 vezes sem juros. No extrajudicial, alguns casos aceitam financiamento longo. <b>O edital diz o que é possível em cada caso</b> — e essa é uma das primeiras coisas que a gente confere.</p>
+    </div>
+    <div class="mito">
+      <h4 class="mito-q">E se o imóvel estiver ocupado?</h4>
+      <p class="mito-a">Tem caminho previsto em lei. Acordo amigável costuma resolver em 30 a 60 dias. Pela via judicial, a imissão na posse leva de 3 a 12 meses. São faixas do mercado, não promessa. <b>Conferimos a ocupação antes do lance</b> e colocamos esse custo e esse tempo na conta. Se o desconto não paga a espera, a gente recomenda passar.</p>
+    </div>
+    <div class="mito">
+      <h4 class="mito-q">A arrematação pode ser anulada?</h4>
+      <p class="mito-a">Pode, nas hipóteses que a lei prevê, e nesse caso o valor pago é devolvido. <b>Ler o processo inteiro serve para isso:</b> achar o problema antes do lance, não depois.</p>
+    </div>
+    <div class="mito">
+      <h4 class="mito-q">Achei um imóvel com 80% de desconto. É uma boa?</h4>
+      <p class="mito-a">Desconfie. Desconto muito acima da média quase sempre é a precificação de um risco que estão te transferindo — ocupante difícil, processo com vício, dívida grande. <b>Sempre tem uma razão, e ela está no edital.</b> Desconto grande sem explicação é o sinal mais claro de que ninguém leu o processo.</p>
+    </div>
+    <div class="mito">
+      <h4 class="mito-q">Leilão serve para quem quer morar no imóvel?</h4>
+      <p class="mito-a">Serve, e não é só investidor grande que compra. Tem fundo imobiliário, tem família atrás da casa própria e tem investidor iniciante bem assessorado. <b>O que muda é o critério:</b> quem vai morar procura imóvel vazio e prazo curto, e costuma chegar em bairro que não caberia no financiamento. Quem investe olha margem e liquidez.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ESPECIALIDADES ================= -->
+<section class="section sec-cream" id="especialidades" style="padding-top:0">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Especialidades</p>
+      <h2 class="h2 rv">O que a gente <em class="mark">faz por você.</em></h2>
+    </div>
+    <p class="lede rv">Escopo e prazo de cada frente ficam definidos em contrato.</p>
+  </div>
+  <div class="esp" data-stagger>
+
+    <div class="esp-card">
+      <span class="num">01</span>
+      <h3 class="h3">Leilão de imóveis e terrenos</h3>
+      <p>Você escolhe o imóvel, ou a gente traz. Dali em diante o trabalho é nosso, até a chave na sua mão.</p>
+      <ul>
+        <li>Procuramos imóveis que servem para o seu objetivo</li>
+        <li>Lemos o processo que levou o bem a leilão</li>
+        <li>Levantamos débitos, penhoras e restrições na matrícula</li>
+        <li>Cuidamos da habilitação e damos o lance</li>
+        <li>Tiramos o ocupante quando é preciso</li>
+        <li>Registramos a matrícula no seu nome</li>
+      </ul>
+    </div>
+
+    <div class="esp-card">
+      <span class="num">02</span>
+      <h3 class="h3">Negociação com credores</h3>
+      <p>Quando ninguém dá lance, o imóvel volta para o credor. É aí que costuma aparecer a melhor negociação — e quase ninguém tenta.</p>
+      <ul>
+        <li>Mapeamos os imóveis que ninguém arrematou</li>
+        <li>Procuramos o banco ou o credor direto</li>
+        <li>Montamos a proposta com parcelamento</li>
+        <li>Negociamos desconto sobre o saldo devedor</li>
+        <li>Fechamos a compra e registramos</li>
+      </ul>
+    </div>
+
+    <div class="esp-card">
+      <span class="num">03</span>
+      <h3 class="h3">Consultoria para investidores</h3>
+      <p>Para quem compra com frequência, a gente acompanha a carteira inteira em vez de um imóvel por vez.</p>
+      <ul>
+        <li>Definimos o critério de compra junto com você</li>
+        <li>Calculamos o custo total e o retorno de cada operação</li>
+        <li>Monitoramos os editais das praças que te interessam</li>
+        <li>Planejamos a saída: revenda, aluguel ou permuta</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= ESTEIRA ================= -->
+<section class="section" id="como-contratar">
+  <div class="band"><i></i><i></i></div>
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Como contratar</p>
+      <h2 class="h2 rv">Quatro passos, <em class="mark">e o primeiro é de graça.</em></h2>
+    </div>
+    <p class="lede rv">Você não precisa decidir nada hoje. Começa lendo, depois conversa, e só contrata quando fizer sentido.</p>
+  </div>
+
+  <div class="esteira" data-stagger>
+    <div class="passo">
+      <span class="passo-n">01</span>
+      <p class="label">Gratuito</p>
+      <h3 class="h3">Baixe o guia</h3>
+      <p>Tudo o que você precisa saber sobre leilão de imóvel — incluindo os riscos que ninguém conta. É o material que a gente gostaria de ter tido no começo.</p>
+      <a class="btn btn-ghost" href="#guia">Baixar o guia</a>
+    </div>
+
+    <div class="passo">
+      <span class="passo-n">02</span>
+      <p class="label">Gratuito</p>
+      <h3 class="h3">Reunião de diagnóstico</h3>
+      <p>Você traz seu objetivo e seu capital. A gente diz com honestidade se leilão faz sentido pra você — inclusive quando a resposta é não.</p>
+      <a class="btn btn-ghost" href="#" data-wa="Olá! Gostaria de agendar a reunião gratuita de diagnóstico.">Agendar reunião</a>
+    </div>
+
+    <div class="passo">
+      <span class="passo-n">03</span>
+      <p class="label">Taxa de assessoria</p>
+      <h3 class="h3">Contratação</h3>
+      <p>A partir daqui o trabalho técnico começa: leitura de processo, matrícula, certidões, cálculo do investimento real. Se a arrematação sair conosco, essa taxa é descontada do valor final.</p>
+    </div>
+
+    <div class="passo dest">
+      <span class="passo-n">04</span>
+      <p class="label">Só se der certo</p>
+      <h3 class="h3">Percentual sobre o desconto</h3>
+      <p>Nosso ganho principal vem da diferença entre o valor de avaliação e o que você pagou de fato. Quanto melhor for o seu negócio, melhor é o nosso. Sem arremate, não há percentual.</p>
+    </div>
+  </div>
+
+  <div class="esteira-nota rv">
+    <h4 class="h4">Por que existe uma taxa antes do resultado</h4>
+    <p>Porque orientar alguém direito consome muitas horas de trabalho técnico, e nem toda conversa vira negócio. A taxa é um filtro: ela separa quem está pesquisando de quem está decidido. Quem paga recebe tempo de gente experiente, não atendimento de esteira. E se o negócio fechar, ela volta descontada.</p>
+    <p class="sim-note" style="color:rgba(245,241,234,.42);margin-top:16px">Valores e percentual definidos em contrato após a reunião de diagnóstico, conforme a complexidade do processo e o valor do imóvel.</p>
+  </div>
+</section>
+
+<!-- ================= PROCESSO ================= -->
+<section class="section sec-steel" id="processo">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv" style="color:var(--gold-lt)">Como funciona</p>
+      <h2 class="h2 rv">Da busca <em class="mark">à chave na mão.</em></h2>
+    </div>
+    <p class="lede rv" style="color:rgba(245,241,234,.75)">Nove etapas. A segunda é a que separa o bom negócio do prejuízo — e é onde a maioria pula.</p>
+  </div>
+  <div class="etapas" data-stagger>
+    <div class="etapa"><div class="etapa-n">01</div><h3 class="h3">Busca e seleção</h3><p>Acompanhamos os editais de leilão judicial, extrajudicial, de bancos e da Caixa. Filtramos o que serve para o seu objetivo, sua região e o capital que você tem.</p></div>
+    <div class="etapa"><div class="etapa-n">02</div><h3 class="h3">Due diligence</h3><p>Lemos o processo e o edital do começo ao fim. Tiramos matrícula atualizada e certidões. Conferimos penhoras, IPTU, condomínio e se tem alguém morando. É aqui que o negócio se define.</p></div>
+    <div class="etapa"><div class="etapa-n">03</div><h3 class="h3">Cálculo do investimento real</h3><p>Somamos ao lance a comissão do leiloeiro, o ITBI, o cartório, os débitos que ficam, o custo de desocupação e a reforma. O número que importa é esse, não o do edital.</p></div>
+    <div class="etapa"><div class="etapa-n">04</div><h3 class="h3">Teto de lance</h3><p>Definimos com você o valor máximo que faz sentido pagar por aquele imóvel. A partir daí ele vira regra: não se ultrapassa na emoção do pregão.</p></div>
+    <div class="etapa"><div class="etapa-n">05</div><h3 class="h3">Habilitação</h3><p>Fazemos o cadastro na plataforma do leiloeiro, organizamos os documentos e depositamos a caução quando é exigida.</p></div>
+    <div class="etapa"><div class="etapa-n">06</div><h3 class="h3">O pregão</h3><p>Acompanhamos o leilão ao vivo, na primeira e na segunda praça, e damos o lance dentro do teto combinado.</p></div>
+    <div class="etapa"><div class="etapa-n">07</div><h3 class="h3">Arrematação e pagamento</h3><p>Assinamos o auto de arrematação e cuidamos do pagamento do lance e da comissão do leiloeiro, dentro dos prazos do edital.</p></div>
+    <div class="etapa"><div class="etapa-n">08</div><h3 class="h3">Carta, ITBI e registro</h3><p>Acompanhamos a expedição da carta de arrematação, recolhemos o ITBI e registramos o título no cartório competente.</p></div>
+    <div class="etapa"><div class="etapa-n">09</div><h3 class="h3">Posse e chaves</h3><p>Entramos com a imissão na posse, conduzimos a desocupação quando precisa e entregamos o imóvel com a matrícula no seu nome.</p></div>
+  </div>
+</section>
+
+<!-- ================= OPORTUNIDADES ================= -->
+<section class="section" id="oportunidades">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Oportunidades</p>
+      <h2 class="h2 rv">Imóveis e terrenos <em class="mark">em praça aberta.</em></h2>
+    </div>
+    <p class="lede rv">Imóveis que já passaram pela nossa análise. O percentual toma como base o valor de avaliação do processo.</p>
+  </div>
+  <div id="ops-container"></div>
+</section>
+<div class="op-float" id="op-float"><img src="" alt="" id="op-float-img"></div>
+
+<!-- ================= RESULTADOS / CASOS ================= -->
+<section class="section sec-navy2" id="casos">
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Casos reais</p>
+      <h2 class="h2 rv">O que já fizemos <em class="mark">e quanto rendeu.</em></h2>
+    </div>
+    <p class="lede rv">Números que os clientes praticaram de verdade. Onde a revenda já aconteceu, o resultado está aí também.</p>
+  </div>
+
+  <!-- resumo agregado, calculado a partir do array CASOS -->
+  <div class="res-strip rv" id="res-strip"></div>
+
+  <!-- filtro por tipo -->
+  <div class="res-filtros rv" id="res-filtros"></div>
+
+  <div id="casos-container"></div>
+
+  <p class="disclaimer rv" style="margin-top:34px">Resultados obtidos em operações já concluídas, com autorização dos respectivos clientes. Desempenho passado não representa garantia de resultado futuro. Cada operação possui condições, prazos e riscos próprios, apurados individualmente na análise prévia.</p>
+</section>
+
+<!-- ================= DEPOIMENTOS ================= -->
+<section class="section sec-cream">
+  <div class="band band-cream"><i></i></div>
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Depoimentos</p>
+      <h2 class="h2 rv">Quem já passou <em class="mark">por isso com a gente.</em></h2>
+    </div>
+  </div>
+  <div class="depos" data-stagger>
+    <div class="depo">
+      <div class="aspas">&ldquo;</div>
+      <blockquote>Substituir pelo depoimento real do cliente. O ideal é um texto de quatro a seis linhas contando qual era o receio inicial, como foi o acompanhamento e qual foi o resultado da operação.</blockquote>
+      <footer><cite>Nome do cliente</cite><small>Investidor</small></footer>
+    </div>
+    <div class="depo">
+      <div class="aspas">&ldquo;</div>
+      <blockquote>Substituir pelo depoimento real do cliente. Depoimentos que mencionam prazos cumpridos, clareza na comunicação e ausência de surpresas costumam converter melhor neste segmento.</blockquote>
+      <footer><cite>Nome do cliente</cite><small>Compradora — moradia própria</small></footer>
+    </div>
+    <div class="depo">
+      <div class="aspas">&ldquo;</div>
+      <blockquote>Substituir pelo depoimento real do cliente. Havendo depoimento em vídeo, este bloco pode ser convertido em player, mantendo o nome e a qualificação abaixo.</blockquote>
+      <footer><cite>Nome do cliente</cite><small>Empresário</small></footer>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EQUIPE ================= -->
+<section class="section" id="equipe">
+  <div class="band"><i></i><i></i></div>
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Quem somos</p>
+      <h2 class="h2 rv">Quem lê o processo <em class="mark">e quem te atende.</em></h2>
+    </div>
+    <p class="lede rv">Além de assessorar, a gente compra, reforma e revende com o próprio dinheiro. O risco que a gente calcula pra você é o mesmo que a gente corre.</p>
+  </div>
+  <div class="socios" data-stagger>
+    <div class="socio">
+      <div class="socio-foto"><span>Foto do sócio</span></div>
+      <div class="socio-body">
+        <p class="label">Sócio-fundador</p>
+        <h3 class="h3">Tiago Aragão</h3>
+        <p>Dez anos de mercado analisando edital, calculando risco e arrematando de verdade. Substituir por biografia completa: formação, número de operações conduzidas e áreas de especialização.</p>
+      </div>
+    </div>
+    <div class="socio">
+      <div class="socio-foto"><span>Foto do sócio</span></div>
+      <div class="socio-body">
+        <p class="label">Sócio</p>
+        <h3 class="h3">Marco Lourenço</h3>
+        <p>Substituir por biografia. Se houver advogado na equipe, informar a inscrição na OAB e a especialização em direito imobiliário.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GUIA ================= -->
+<section class="section sec-steel" id="guia">
+  <div class="captura">
+    <div>
+      <p class="eyebrow rv" style="color:var(--gold-lt);margin-bottom:24px">Material gratuito</p>
+      <h2 class="h2 rv">Tudo sobre leilão de imóvel — <em class="mark">inclusive os riscos.</em></h2>
+      <p class="lede rv" style="color:rgba(245,241,234,.78);margin-top:22px">Fizemos o guia que a gente gostaria de ter tido no começo. O que é cada tipo de leilão, o que entra na conta além do lance, o que fazer com imóvel ocupado e os erros que mais custam dinheiro.</p>
+      <p class="cap-note rv" style="margin-top:20px">Sem custo. Sem compromisso.</p>
+    </div>
+    <div class="cap-form rv">
+      <input type="text" id="cap-nome" placeholder="Nome completo" autocomplete="name">
+      <input type="tel" id="cap-tel" placeholder="Telefone com DDD" autocomplete="tel">
+      <input type="email" id="cap-email" placeholder="E-mail" autocomplete="email">
+      <button class="btn" id="cap-btn">Quero o guia</button>
+      <p class="cap-msg" id="cap-msg"></p>
+      <p class="cap-note">Ao enviar, o WhatsApp abre com seus dados preenchidos e a gente manda o PDF. Não mandamos mensagem que você não pediu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="section" id="duvidas">
+  <div class="band"><i></i></div>
+  <div class="sec-head">
+    <div>
+      <p class="eyebrow rv">Perguntas frequentes</p>
+      <h2 class="h2 rv">O que <em class="mark">todo mundo pergunta.</em></h2>
+    </div>
+  </div>
+  <div class="faq" id="faq"></div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta">
+  <div class="band band-steel"><i></i><i></i></div>
+  <p class="eyebrow rv">Fale com a gente</p>
+  <h2 class="h2 rv">Converse antes <em class="mark">de dar qualquer lance.</em></h2>
+  <p class="lede rv">Reunião gratuita de diagnóstico: você traz seu objetivo, a gente diz com honestidade se faz sentido. Se já tiver um imóvel em vista, manda o link do edital junto.</p>
+  <a class="btn rv" href="#" data-wa="Olá! Gostaria de agendar a reunião gratuita de diagnóstico.">Agendar reunião gratuita</a>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site">
+  <div class="foot-grid">
+    <div>
+      <div class="brand" style="margin-bottom:18px"><b>MT CAPITAL</b><small>Assessoria em Investimento e Negócios</small></div>
+      <p style="max-width:36ch">Assessoria em arrematação de imóveis e terrenos em leilão judicial e extrajudicial.</p>
+    </div>
+    <div>
+      <h4>Mapa do site</h4>
+      <a href="#especialidades">Especialidades</a>
+        <a href="#processo">Como funciona</a>
+      <a href="#oportunidades">Oportunidades</a>
+      <a href="#casos">Casos reais</a>
+      <a href="#equipe">Quem somos</a>
+      <a href="#duvidas">Perguntas frequentes</a>
+    </div>
+    <div>
+      <h4>Contato</h4>
+      <a href="#" data-wa="Olá! Vim pelo site da MT Capital.">WhatsApp</a>
+      <a href="#" id="tel-link">(11) 0000-0000</a>
+      <a href="mailto:contato@mtcapital.com.br">contato@mtcapital.com.br</a>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div>
+      <h4>Escritório</h4>
+      <p>Av. Exemplo, 000 — Conj. 00<br>São Paulo — SP<br>CEP 00000-000</p>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <span>© <span id="ano">2026</span> MT Capital. Todos os direitos reservados.</span>
+    <span>Política de privacidade</span>
+  </div>
+  <p class="disclaimer">Os valores apresentados correspondem a avaliações constantes dos respectivos editais e não constituem garantia de rentabilidade, de arrematação ou de valorização futura. A arrematação em leilão envolve riscos, custos adicionais e prazos processuais próprios. Toda operação é precedida de análise individual e de contrato escrito. A MT Capital presta serviços de assessoria em investimento e negócios; atos privativos de advogado são conduzidos por profissionais regularmente inscritos na Ordem dos Advogados do Brasil.</p>
+</footer>
+
+</div></div>
+
+<a class="wa-float" href="#" data-wa="Olá! Vim pelo site da MT Capital e gostaria de falar com um especialista." aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5-4.5-.2-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .7.5l1 2.3c.1.2.1.4 0 .6l-.4.6-.3.3c-.1.2-.3.4-.1.7.2.3.8 1.4 1.8 2.3 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.7-.1l1-1.2c.2-.2.4-.2.6-.1l2.2 1c.3.2.5.2.5.4.1.1.1.6-.1 1.2z"/></svg>
+</a>
+
+<script>
+/* ============================================================
+   1. CONFIGURAÇÃO — alterar apenas este bloco
+   ============================================================ */
+const CONFIG = {
+  marca:'MT Capital',
+  whatsapp:'5511000000000',   // DDI+DDD+número, apenas dígitos
+  telefone:'(11) 0000-0000',
+  percentual:null,            // % sobre a diferença — A DEFINIR (pendência do plano de conteúdo)
+  taxaAssessoria:null,        // taxa de assessoria — A DEFINIR
+  apiImoveis:null             // painel admin: '/api/imoveis'
+};
+
+/* ============================================================
+   2. IMÓVEIS — populado pelo painel administrativo
+   {
+     id:'lote-001', tipo:'Terreno',
+     titulo:'Terreno 1.240 m² — Praia Grande',
+     cidade:'Angra dos Reis', uf:'RJ', bairro:'Praia Grande',
+     area:1240, quartos:null, vagas:null,
+     valorAvaliacao:1000000,
+     lance1:{valor:1000000,data:'2026-08-14'},
+     lance2:{valor:250000, data:'2026-08-21'},
+     imagem:'https://.../foto.jpg', status:'aberto'
+   }
+   ============================================================ */
+let IMOVEIS = [];
+
+/* ============================================================
+   2b. CASOS REAIS  —  SUBSTITUIR PELOS CASOS VERDADEIROS
+   ------------------------------------------------------------
+   Este array alimenta DUAS coisas ao mesmo tempo:
+     · a faixa de números do topo do site (calculada, nunca digitada)
+     · a seção "Casos reais"
+   Preencha aqui e o resto do site se atualiza sozinho.
+
+   REGRA DOS CASES (plano de conteúdo DigiThree):
+     NUNCA prometer desconto. SEMPRE mostrar o desconto JÁ ENTREGUE,
+     com a conta completa: avaliação, arremate, custos, prazo e resultado.
+
+   Campos:
+     tipo         'Casa' | 'Apartamento' | 'Terreno' | 'Galpão' | 'Sala'
+     avaliacao    valor de avaliação do laudo (número, sem formatação)
+     arremate     valor efetivamente pago
+     venda        valor da revenda JÁ CONCLUÍDA — ou null se ainda não vendeu
+     custos       comissão, ITBI, registro, reforma, desocupação (opcional)
+     prazoMeses   da arrematação até a entrega das chaves (opcional)
+     parcelas     quando houve parcelamento (opcional)
+     imagem       URL da foto — ou null para exibir o placeholder
+     autorizado   true somente se o cliente autorizou a divulgação
+   ============================================================ */
+const CASOS = [
+  {
+    id:'ribeira',
+    tipo:'Casa',
+    titulo:'Casa arrematada na Ribeira',
+    local:'Ribeira · RJ',
+    resumo:'Substituir por duas ou três linhas: situação do imóvel, o entrave identificado no processo e como a equipe resolveu.',
+    avaliacao:0,
+    arremate:0,
+    venda:null,
+    custos:0,
+    prazoMeses:null,
+    imagem:null,
+    autorizado:true
+  },
+  {
+    id:'ilha',
+    tipo:'Terreno',
+    titulo:'Terreno adquirido após leilão deserto',
+    local:'Ilha · RJ',
+    resumo:'O bem não recebeu lances em nenhuma das praças. A equipe negociou diretamente com o credor e fechou a aquisição parcelada, sem disputa de pregão.',
+    avaliacao:0,
+    arremate:500000,
+    venda:null,
+    custos:0,
+    parcelas:18,
+    prazoMeses:null,
+    imagem:null,
+    autorizado:true
+  }
+];
+
+/* Anos de atuação — usado na faixa do topo */
+const ANOS_ATUACAO = 10;   // Tiago Aragão — 10 anos de mercado
+
+/* ================= 3. HELPERS ================= */
+const brl = n => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+const waLink = m => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(m)}`;
+const dataBR = iso => { if(!iso) return '—'; const [a,m,d]=iso.split('-'); return `${d}/${m}/${a}`; };
+const E = id => document.getElementById(id);
+
+document.querySelectorAll('[data-wa]').forEach(el=>{ el.href=waLink(el.dataset.wa); el.target='_blank'; el.rel='noopener'; });
+E('ano').textContent = new Date().getFullYear();
+E('tel-link').textContent = CONFIG.telefone;
+E('tel-link').href = 'tel:+' + CONFIG.whatsapp;
+
+/* ================= 4. SMOOTH SCROLL ================= */
+const content = E('smooth-content');
+const reduce  = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isTouch = matchMedia('(hover: none)').matches;
+let smooth = !reduce && !isTouch && innerWidth > 900;
+let cur = 0;
+
+function setBodyHeight(){ document.body.style.height = smooth ? content.getBoundingClientRect().height+'px' : ''; }
+function loop(){
+  if(smooth){
+    const t = scrollY;
+    cur += (t - cur) * .085;
+    if(Math.abs(t - cur) < .08) cur = t;
+    content.style.transform = `translate3d(0,${-cur.toFixed(2)}px,0)`;
+  }
+  requestAnimationFrame(loop);
+}
+function apply(){ document.body.classList.toggle('no-smooth', !smooth); setBodyHeight(); }
+addEventListener('resize', ()=>{ smooth = !reduce && !isTouch && innerWidth > 900; apply(); });
+if(window.ResizeObserver) new ResizeObserver(setBodyHeight).observe(content);
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href'); if(id === '#') return;
+    const el = document.querySelector(id); if(!el) return;
+    e.preventDefault();
+    scrollTo({ top: el.getBoundingClientRect().top + (smooth ? cur : scrollY), behavior: reduce ? 'auto' : 'smooth' });
+  });
+});
+
+/* ================= 5. NAV / REVEALS / CONTADORES ================= */
+const nav = E('nav');
+addEventListener('scroll', ()=> nav.classList.toggle('stuck', scrollY > 60));
+
+const io = new IntersectionObserver(es=>{
+  es.forEach(en=>{
+    if(!en.isIntersecting) return;
+    const el = en.target;
+    if(el.hasAttribute('data-stagger')) [...el.children].forEach((c,i)=> c.style.transitionDelay = (i*90)+'ms');
+    el.classList.add('in');
+    el.querySelectorAll('[data-count]').forEach(countUp);
+    io.unobserve(el);
+  });
+},{ threshold:.15, rootMargin:'0px 0px -8% 0px' });
+
+function observeAll(){
+  document.querySelectorAll('.rv, .rv-mask, [data-stagger]').forEach(el=>{
+    if(!el.classList.contains('in')) io.observe(el);
+  });
+}
+document.querySelectorAll('.hero .rv').forEach((el,i)=> el.style.transitionDelay = (150 + i*120)+'ms');
+
+function countUp(el){
+  if(el.dataset.done) return; el.dataset.done = 1;
+  const pre = el.dataset.prefix||'', suf = el.dataset.suffix||'', end = parseFloat(el.dataset.count);
+  if(reduce){ el.textContent = pre + end.toLocaleString('pt-BR') + suf; return; }
+  const t0 = performance.now(), dur = 1500;
+  (function tick(t){
+    const p = Math.min((t-t0)/dur,1), e = 1-Math.pow(1-p,3);
+    el.textContent = pre + Math.round(end*e).toLocaleString('pt-BR') + suf;
+    if(p<1) requestAnimationFrame(tick);
+  })(t0);
+}
+
+/* ================= 7. OPORTUNIDADES ================= */
+const opsContainer = E('ops-container'), opFloat = E('op-float'), opImg = E('op-float-img');
+
+function renderOps(lista){
+  if(!lista || !lista.length){
+    opsContainer.innerHTML = `
+      <div class="ops-empty rv">
+        <p class="label">Nada publicado agora</p>
+        <h3 class="h3">Estamos analisando os editais da próxima praça.</h3>
+        <p>Entre na lista e receba as oportunidades assim que a gente terminar de analisar, com o parecer preliminar pronto.</p>
+        <a class="btn" href="${waLink('Olá! Gostaria de receber as oportunidades de leilão da MT Capital.')}" target="_blank" rel="noopener">Receber oportunidades</a>
+      </div>`;
+    observeAll(); return;
+  }
+
+  opsContainer.innerHTML = `<div class="ops-list rv" data-stagger>` + lista.map(im=>{
+    const valor = im.lance2?.valor ?? im.lance1?.valor ?? 0;
+    const off = im.valorAvaliacao ? Math.round((1 - valor/im.valorAvaliacao)*100) : 0;
+    const meta = [
+      im.tipo,
+      [im.bairro, im.cidade, im.uf].filter(Boolean).join(' · '),
+      im.area ? im.area.toLocaleString('pt-BR')+' m²' : null,
+      im.quartos ? im.quartos+' quartos' : null,
+      im.vagas ? im.vagas+' vagas' : null,
+      im.lance2?.data ? '2ª praça '+dataBR(im.lance2.data) : null
+    ].filter(Boolean).map(m=>`<span>${m}</span>`).join('');
+    const msg = `Olá! Tenho interesse no seguinte imóvel:\n\n${im.titulo}\nAvaliação: ${brl(im.valorAvaliacao)}\nLance mínimo: ${brl(valor)}\n\nGostaria de receber a análise.`;
+    return `<a class="op" href="${waLink(msg)}" target="_blank" rel="noopener" ${im.imagem?`data-img="${im.imagem}"`:''}>
+      <div class="op-main"><span class="op-title">${im.titulo}</span><div class="op-meta">${meta}</div></div>
+      <div class="op-right"><span class="op-price">${brl(valor)}</span>${off>0?`<span class="op-off">${off}% abaixo da avaliação</span>`:''}</div>
+    </a>`;
+  }).join('') + `</div>`;
+
+  document.querySelectorAll('.op[data-img]').forEach(op=>{
+    op.addEventListener('mouseenter', ()=>{ opImg.src = op.dataset.img; opFloat.classList.add('on'); });
+    op.addEventListener('mouseleave', ()=> opFloat.classList.remove('on'));
+  });
+  if(document.querySelector('.op[data-img]'))
+    document.addEventListener('mousemove', e=>{ opFloat.style.top = e.clientY+'px'; opFloat.style.left = e.clientX+'px'; });
+
+  observeAll();
+}
+
+async function carregarImoveis(){
+  if(CONFIG.apiImoveis){
+    try{ const r = await fetch(CONFIG.apiImoveis); if(r.ok) IMOVEIS = await r.json(); }
+    catch(err){ console.warn('Falha ao carregar imóveis:', err); }
+  }
+  renderOps(IMOVEIS.filter(i => i.status !== 'encerrado'));
+}
+
+/* ================= 7b. CASOS REAIS + NÚMEROS AGREGADOS ================= */
+const casosPub = CASOS.filter(c => c.autorizado !== false);
+
+/* lucro apurado só existe quando houve revenda concluída */
+const lucroDe = c => (c.venda ? c.venda - c.arremate - (c.custos||0) : null);
+const descontoDe = c => (c.avaliacao && c.arremate ? Math.round((1 - c.arremate/c.avaliacao)*100) : null);
+
+function numerosAgregados(){
+  const volume = casosPub.reduce((s,c)=> s + (c.avaliacao || c.arremate || 0), 0);
+  const descontos = casosPub.map(descontoDe).filter(d => d !== null && d > 0);
+  const maiorDesc = descontos.length ? Math.max(...descontos) : 0;
+
+  E('bn-anos').dataset.count = ANOS_ATUACAO;
+  E('bn-ops').dataset.count  = casosPub.length;
+  E('bn-vol').dataset.count  = Math.round(volume/1e6);
+  E('bn-desc').dataset.count = maiorDesc;
+
+  /* faixa de resumo dentro da seção de casos */
+  const lucros = casosPub.map(lucroDe).filter(v => v !== null);
+  const lucroTotal = lucros.reduce((s,v)=> s+v, 0);
+  const descMedio = descontos.length ? Math.round(descontos.reduce((s,d)=>s+d,0)/descontos.length) : 0;
+
+  const cells = [
+    [casosPub.length, 'Operações concluídas'],
+    [volume ? brl(volume) : '—', 'Volume total avaliado'],
+    [descMedio ? descMedio+'%' : '—', 'Desconto médio'],
+    [lucroTotal ? brl(lucroTotal) : '—', 'Resultado nas revendas']
+  ];
+  E('res-strip').innerHTML = cells.map(([k,v])=>
+    `<div><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+}
+
+function renderCasos(filtro){
+  const lista = filtro && filtro !== 'todos'
+    ? casosPub.filter(c => c.tipo === filtro)
+    : casosPub;
+
+  const box = E('casos-container');
+  if(!lista.length){
+    box.innerHTML = `<div class="casos-vazio">Nenhum caso publicado nessa categoria ainda.</div>`;
+    return;
+  }
+
+  box.innerHTML = `<div class="casos" data-stagger>` + lista.map(c=>{
+    const desc  = descontoDe(c);
+    const lucro = lucroDe(c);
+    const fmt = v => v ? brl(v) : 'R$ 000.000';
+
+    /* três pares de números possíveis, na ordem de força persuasiva */
+    const investReal = c.arremate ? c.arremate + (c.custos||0) : 0;
+    let nums = `<div><span>Avaliação</span><b>${fmt(c.avaliacao)}</b></div>
+                <div><span>Arrematação</span><b>${fmt(c.arremate)}</b></div>
+                <div class="up"><span>Investimento real</span><b>${fmt(investReal)}</b></div>`;
+    if(c.parcelas)   nums += `<div><span>Parcelamento</span><b>${c.parcelas}×</b></div>`;
+    if(c.prazoMeses) nums += `<div><span>Até a posse</span><b>${c.prazoMeses} meses</b></div>`;
+
+    const blocoLucro = lucro
+      ? `<div class="caso-lucro"><b>${brl(lucro)}</b><span>Resultado na revenda</span></div>`
+      : '';
+
+    const foto = c.imagem
+      ? `<img src="${c.imagem}" alt="${c.titulo}" loading="lazy">`
+      : `<span class="caso-ph">Foto do imóvel</span>`;
+
+    const badge = desc ? `<span class="caso-badge">${desc}% abaixo</span>` : '';
+
+    return `<article class="caso">
+      <div class="caso-img">${badge}${foto}</div>
+      <div class="caso-body">
+        <p class="label">${c.tipo} · ${c.local}</p>
+        <h3 class="h3">${c.titulo}</h3>
+        <p>${c.resumo}</p>
+        <div class="caso-nums">${nums}</div>
+        ${blocoLucro}
+      </div>
+    </article>`;
+  }).join('') + `</div>`;
+
+  observeAll();
+  setTimeout(setBodyHeight, 60);
+}
+
+function montarFiltros(){
+  const tipos = [...new Set(casosPub.map(c=>c.tipo))];
+  if(tipos.length < 2){ E('res-filtros').style.display='none'; return; }
+  const opts = ['todos', ...tipos];
+  E('res-filtros').innerHTML = opts.map((t,i)=>
+    `<button data-tipo="${t}" class="${i===0?'on':''}">${t === 'todos' ? 'Todos' : t}</button>`).join('');
+  E('res-filtros').addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    E('res-filtros').querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    renderCasos(b.dataset.tipo);
+  });
+}
+
+/* ================= 8. CAPTURA DE LEADS ================= */
+E('cap-btn').addEventListener('click', ()=>{
+  const nome = E('cap-nome').value.trim();
+  const tel  = E('cap-tel').value.trim();
+  const mail = E('cap-email').value.trim();
+  const msg  = E('cap-msg');
+  if(!nome || !tel){
+    msg.textContent = 'Preencha ao menos nome e telefone.';
+    return;
+  }
+  msg.textContent = 'Abrindo o WhatsApp…';
+  const texto = `Olá! Gostaria de receber o guia gratuito sobre leilão de imóveis.\n\n`+
+                `Nome: ${nome}\nTelefone: ${tel}` + (mail ? `\nE-mail: ${mail}` : '');
+  window.open(waLink(texto), '_blank', 'noopener');
+});
+
+/* ================= 9. FAQ ================= */
+const PERGUNTAS = [
+  ['Qual a diferença entre leilão judicial e extrajudicial?',
+   'O judicial nasce de um processo em andamento e segue o rito dos artigos 879 a 903 do Código de Processo Civil, com edital nos autos e leiloeiro nomeado pelo juiz. O extrajudicial nasce quando o banco consolida a propriedade de um imóvel financiado, e segue a Lei 9.514/97. Os dois exigem análise antes do lance, mas o que vem depois da arrematação é bem diferente em cada um.'],
+  ['Eu herdo as dívidas do imóvel?',
+   'As tributárias, não. O STJ firmou no Tema 1.134 que a arrematação é aquisição originária para fins tributários — o passivo antigo de IPTU não acompanha o arrematante. Dívida de condomínio é outra natureza e costuma seguir o imóvel. Na análise a gente levanta tudo e mostra o que fica com você antes de qualquer lance.'],
+  ['Além do lance, o que mais eu pago?',
+   'A comissão do leiloeiro, que costuma ser 5% sobre o valor da arrematação. Depois o ITBI e o cartório. Conforme o caso, ainda entram dívida de condomínio, o custo de desocupar e a reforma. Somamos tudo isso ao lance e chamamos de investimento real. É esse número que a gente coloca na sua frente, não o do edital.'],
+  ['Preciso ter o valor todo à vista?',
+   'Menos do que a maioria imagina. Em leilão judicial dá para entrar com 25% e parcelar o restante em até 30 vezes sem juros. No extrajudicial, alguns casos aceitam financiamento longo. Cada edital tem sua regra, e conferir isso é uma das primeiras coisas que fazemos.'],
+  ['Em quanto tempo eu recebo as chaves?',
+   'Depende de o imóvel estar vazio ou ocupado. Estando vazio, o caminho é a carta de arrematação, o ITBI e o registro. Estando ocupado, entra a desocupação: um acordo amigável costuma resolver em 30 a 60 dias, e a via judicial leva de 3 a 12 meses. São faixas de mercado, não promessa — na análise a gente estima o prazo daquele caso específico.'],
+  ['A arrematação pode ser anulada?',
+   'Pode, nas hipóteses que a lei prevê, e nesse caso o valor pago é devolvido. Ler o processo inteiro antes serve exatamente para achar esses sinais e recomendar que você fique fora quando o risco não compensa.'],
+  ['Vi um imóvel com desconto enorme. Vale a pena?',
+   'Desconto muito acima da média costuma ser a precificação de um risco que estão te transferindo: ocupante difícil, vício no processo, dívida grande, imóvel em estado ruim. Sempre tem uma razão, e ela normalmente está escrita no edital. Desconto grande não é oportunidade nem armadilha por si só — é um sinal de que alguém precisa ler o processo com atenção.'],
+  ['Como funciona a cobrança de vocês?',
+   'São dois momentos. Primeiro uma taxa de assessoria, cobrada na contratação, que dá início ao trabalho técnico. Se a arrematação sair conosco, essa taxa é descontada do valor final. Depois, um percentual sobre a diferença entre o valor de avaliação e o que você pagou de fato. Sem arremate, não há percentual. Os valores são definidos em contrato depois da reunião de diagnóstico.'],
+  ['Por que existe uma taxa antes do resultado?',
+   'Porque orientar alguém direito consome muitas horas de trabalho técnico e nem toda conversa vira negócio. A taxa funciona como filtro: separa quem está pesquisando de quem está decidido. Quem paga recebe tempo de gente experiente em vez de atendimento de esteira — e, fechando o negócio, ela volta descontada.'],
+  ['Vocês trabalham em quais lugares?',
+   'Em leilões de todo o Brasil. Leilão eletrônico dá para acompanhar de qualquer lugar; os presenciais a gente avalia caso a caso.'],
+  ['Dá para comprar em leilão para morar?',
+   'Dá, e não é só investidor grande que compra: tem fundo imobiliário, tem família atrás da casa própria e tem investidor iniciante bem assessorado. Quem vai morar costuma alcançar um bairro que não caberia num financiamento tradicional. Nesse caso a gente procura imóvel vazio, com matrícula limpa e prazo previsível.']
+];
+
+E('faq').innerHTML = PERGUNTAS.map((p,i)=>`
+  <div class="faq-item">
+    <button class="faq-q" aria-expanded="false" aria-controls="fa-${i}">${p[0]}</button>
+    <div class="faq-a" id="fa-${i}"><p>${p[1]}</p></div>
+  </div>`).join('');
+
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const item = btn.parentElement, ans = item.querySelector('.faq-a');
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(o=>{
+      o.classList.remove('open');
+      o.querySelector('.faq-a').style.maxHeight = 0;
+      o.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if(!wasOpen){
+      item.classList.add('open');
+      ans.style.maxHeight = ans.scrollHeight+'px';
+      btn.setAttribute('aria-expanded','true');
+    }
+    setTimeout(setBodyHeight, 520);
+  });
+});
+
+/* ================= 10. BOOT ================= */
+numerosAgregados(); montarFiltros(); renderCasos('todos');
+apply(); observeAll(); carregarImoveis(); requestAnimationFrame(loop);
+addEventListener('load', setBodyHeight);
+</script>
+</body>
+</html>
