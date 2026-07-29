@@ -27,7 +27,7 @@ export function Monograma({
       {/* M — haste vertical esquerda + zigue-zague */}
       <path
         fill={corM}
-        d="M2,10 L2,106 L18,106 L18,10 Z M2,10 L60,64 L109,10 L113,24 L98,26 L60,52 L18,10 Z"
+        d="M2,10 L2,106 L18,106 L18,10 Z M2,10 L60,64 L109,10 L60,52 L18,10 Z"
       />
       {/* T — barra diagonal atravessando o vão do M + haste vertical direita */}
       <path
