@@ -17,6 +17,18 @@ export async function POST(req: Request) {
   try { bruto = await req.json() }
   catch { return NextResponse.json({ erro: 'Envio inválido.' }, { status: 400 }) }
 
+  // Campo-armadilha preenchido: robô. Responde como sucesso e descarta,
+  // antes da validação — um robô que preenche o campo enviaria uma string
+  // não vazia, que a validação rejeitaria com 400, entregando ao robô um
+  // diagnóstico de qual campo esvaziar. Checagem no corpo bruto evita isso.
+  if (
+    bruto && typeof bruto === 'object' &&
+    typeof (bruto as Record<string, unknown>).armadilha === 'string' &&
+    (bruto as Record<string, unknown>).armadilha !== ''
+  ) {
+    return NextResponse.json({ ok: true })
+  }
+
   const analise = LeadSchema.safeParse(bruto)
   if (!analise.success) {
     const campos = analise.error.issues.map((i) => ({
@@ -25,9 +37,6 @@ export async function POST(req: Request) {
     }))
     return NextResponse.json({ erro: 'Confira os campos.', campos }, { status: 400 })
   }
-
-  // Campo-armadilha preenchido: robô. Responde como sucesso e descarta.
-  if (analise.data.armadilha) return NextResponse.json({ ok: true })
 
   const resultado = await registrarLead(analise.data)
 

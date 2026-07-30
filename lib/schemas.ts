@@ -44,9 +44,9 @@ export const ImovelSchema = z.object({
 })
 
 export const LeadSchema = z.object({
-  nome: z.string().trim().min(2).max(120),
-  telefone: z.string().trim().min(10).max(20),
-  email: z.string().trim().email().max(160).or(z.literal('')),
+  nome: z.string().trim().min(2, { error: 'Informe seu nome completo.' }).max(120),
+  telefone: z.string().trim().min(10, { error: 'Informe um telefone válido, com DDD.' }).max(20),
+  email: z.string().trim().email({ error: 'Informe um e-mail válido.' }).max(160).or(z.literal('')),
   consentimento: z.literal(true, {
     error: 'É preciso aceitar o uso dos dados para receber o material.',
   }),
@@ -57,4 +57,3 @@ export const LeadSchema = z.object({
 export type Caso = z.infer<typeof CasoSchema>
 export type Imovel = z.infer<typeof ImovelSchema>
 export type Lead = z.infer<typeof LeadSchema>
-
