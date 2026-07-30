@@ -71,3 +71,7 @@ em.mark{font-style:italic;font-weight:400;color:var(--gold-lt)}
   *{animation:none!important;transition-duration:.01ms!important}
   .rv,.rv-mask,[data-stagger]>*{opacity:1!important;transform:none!important;clip-path:none!important}
 }
+
+/* ================= SMOOTH SCROLL (Lenis) ================= */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
