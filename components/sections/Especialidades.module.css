@@ -1,0 +1,14 @@
+/* Fonte: referencia/index.html:133–140 (regras .esp/.esp-card/.esp-card .num/p/ul/li),
+   movidas para o módulo da seção que as usa — ver mesmo padrão em Mitos.module.css. */
+.esp{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-l);border:1px solid var(--line-l)}
+.esp-card{background:var(--cream);padding:clamp(28px,3.2vw,42px);display:flex;flex-direction:column;gap:16px}
+.esp-card .num{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--gold)}
+.esp-card p{font-size:.94rem;color:rgba(25,35,50,.68)}
+.esp-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:auto;padding-top:20px;border-top:1px solid var(--line-l)}
+.esp-card li{padding-left:20px;position:relative;font-size:.9rem;color:rgba(25,35,50,.72)}
+.esp-card li::before{content:"";position:absolute;left:0;top:.6em;width:9px;height:1px;background:var(--gold)}
+
+/* index.html:293 — recorte de .esp do bloco responsivo de 1080px */
+@media(max-width:1080px){
+  .esp{grid-template-columns:1fr}
+}
