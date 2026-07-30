@@ -1,0 +1,30 @@
+/* Fonte: referencia/index.html:143–151 (regras .esteira/.passo/.passo:hover/
+   .passo.dest/.passo-n/.passo p/.passo .btn/.esteira-nota/.esteira-nota p),
+   movidas para o módulo da seção que as usa — ver mesmo padrão em
+   Especialidades.module.css. A classe global .btn (base.css) é referenciada
+   aqui via :global() porque o seletor original a aninha dentro de .passo. */
+.esteira{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d)}
+.passo{background:var(--navy);padding:clamp(26px,2.8vw,36px);display:flex;flex-direction:column;gap:14px;transition:background .4s}
+.passo:hover{background:rgba(168,132,88,.05)}
+.passo.dest{background:var(--navy-2);border-top:2px solid var(--gold)}
+.passo-n{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--gold)}
+.passo p{font-size:.92rem;color:rgba(245,241,234,.66)}
+.passo :global(.btn){margin-top:auto;align-self:flex-start}
+.esteira-nota{border:1px solid var(--line-d);border-top:0;padding:clamp(26px,3vw,38px);background:rgba(245,241,234,.02)}
+.esteira-nota p{font-size:.95rem;color:rgba(245,241,234,.66);max-width:78ch;margin-top:12px}
+
+/* index.html:294 — recorte de .esteira do bloco responsivo de 1080px
+   (os outros seletores dessa regra pertencem a outras seções, já portados
+   nelas — ver mesmo comentário em Especialidades.module.css) */
+@media(max-width:1080px){
+  .esteira{grid-template-columns:1fr 1fr}
+}
+
+/* index.html:306–307 — recorte de .esteira do bloco responsivo de 760px
+   (.mito e .socio pertencem a outras seções — ver comentário em
+   Mitos.module.css. A segunda regra da origem, .esteira{gap:1px}, sobrescreve
+   só o gap definido pela regra combinada anterior; reproduzida aqui já
+   resolvida em uma única declaração para o mesmo resultado final) */
+@media(max-width:760px){
+  .esteira{grid-template-columns:1fr;gap:1px}
+}
