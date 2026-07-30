@@ -1,0 +1,19 @@
+/* Fonte: styles/base.css:121–126 (regras .split/.manifesto/.split-side,
+   movidas para o módulo da seção que as usa — ver mesmo padrão em
+   Pilares.module.css). A regra .sec-cream .split-side p nunca se aplica hoje
+   (esta seção não usa sec-cream), mas é mantida por fidelidade ao CSS de
+   origem, com o seletor global corrigido para módulos CSS. */
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,6vw,84px);align-items:start}
+.manifesto{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.22;max-width:20ch}
+.split-side p{color:rgba(245,241,234,.7)}
+.split-side p + p{margin-top:20px}
+:global(.sec-cream) .split-side p{color:rgba(25,35,50,.7)}
+
+/* index.html:403 — margin-bottom:32px é inline no HTML de origem, específico
+   deste eyebrow (não faz parte da regra global .eyebrow em base.css) */
+.split :global(.eyebrow){margin-bottom:32px}
+
+/* index.html:292 — recorte de .split do bloco responsivo de 1080px */
+@media(max-width:1080px){
+  .split{grid-template-columns:1fr}
+}
