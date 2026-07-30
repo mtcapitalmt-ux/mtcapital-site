@@ -16,22 +16,24 @@ import { Rodape } from "@/components/sections/Rodape";
 
 export default function Home() {
   return (
-    <main id="conteudo">
-      <Hero />
-      <Pilares />
-      <Esclarecimentos />
-      <Mitos />
-      <Especialidades />
-      <Esteira />
-      <Processo />
-      <Oportunidades />
-      <Casos />
-      <Depoimentos />
-      <Equipe />
-      <Guia />
-      <Faq />
-      <Cta />
+    <>
+      <main id="conteudo">
+        <Hero />
+        <Pilares />
+        <Esclarecimentos />
+        <Mitos />
+        <Especialidades />
+        <Esteira />
+        <Processo />
+        <Oportunidades />
+        <Casos />
+        <Depoimentos />
+        <Equipe />
+        <Guia />
+        <Faq />
+        <Cta />
+      </main>
       <Rodape />
-    </main>
+    </>
   );
 }

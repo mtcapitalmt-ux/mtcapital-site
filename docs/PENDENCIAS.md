@@ -14,7 +14,12 @@ Sem isso o site vai ao ar com dados de teste visíveis ao público.
   `lib/config-guard.ts` derruba o build de produção quando detecta os placeholders originais
   `5511000000000` / `(11) 0000-0000`, então um número de teste válido era necessário para as
   tarefas do plano poderem rodar `npm run build`). Substituir pelos números reais da MT
-  Capital antes de publicar.
+  Capital antes de publicar. **Atenção:** os padrões de placeholder em `lib/config-guard.ts`
+  não reconhecem esses números de teste (`5511999999999` / `(11) 99999-9999`) como
+  placeholder — a guarda é hoje um no-op contra esses valores específicos. Ela também não vai
+  pegar um erro de digitação ao inserir os números reais (ex.: um dígito trocado que ainda
+  "pareça" um número válido). A troca pelos números reais precisa de conferência manual; não
+  há proteção automatizada nesse passo.
 - **Endereço do coworking** — `content/config.ts` tem `endereco.linha1` e `endereco.cep` com
   valores de exemplo (`'Av. Exemplo, 000 — Conj. 00'` e `'00000-000'`). Precisam do endereço
   real do escritório/coworking usado pela empresa.
@@ -74,3 +79,11 @@ Não impedem o lançamento, mas deveriam ser resolvidos logo depois.
 - **Busca do nome MT no INPI** — confirmar que "MT Capital" (nome e o monograma vetorizado
   criado na Task 3) não colide com marca registrada de terceiros antes de investir em
   material de marca mais permanente.
+- **`app/favicon.ico` ainda é o ícone padrão do scaffold do Next.js** (25 KB, nunca
+  substituído) — apesar de a Task 3 ter criado o ícone de marca `app/icon.svg`, o Next.js
+  emite os dois, e o `.ico` estático tem prioridade sobre requisições diretas a
+  `/favicon.ico` em navegadores/superfícies que ainda pedem esse caminho. Substituir por um
+  favicon derivado da marca, ou remover o arquivo para que `icon.svg` assuma sozinho.
+- **Assets de scaffold do Next.js sem uso em `public/`** — `next.svg`, `vercel.svg`,
+  `file.svg`, `globe.svg` e `window.svg` nunca são referenciados em nenhum lugar do site.
+  Seguros para excluir.

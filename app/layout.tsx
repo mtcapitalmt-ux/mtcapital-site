@@ -27,6 +27,7 @@ const playfair = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mtcapital.com.br"),
   title: "MT Capital — Assessoria em Leilão de Imóveis e Terrenos",
   description:
     "Assessoria em leilão de imóveis e terrenos. Lemos o processo, calculamos o custo real da operação e dizemos até quanto vale a pena pagar. Do edital ao registro da matrícula.",
