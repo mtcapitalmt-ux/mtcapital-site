@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { headers } from "next/headers";
 import "@/styles/tokens.css";
 import "@/styles/base.css";
 import { config } from "@/content/config";
@@ -33,11 +34,17 @@ export const metadata: Metadata = {
     "Assessoria em leilão de imóveis e terrenos. Lemos o processo, calculamos o custo real da operação e dizemos até quanto vale a pena pagar. Do edital ao registro da matrícula.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Nonce por requisição, gerado em `proxy.ts` e repassado via cabeçalho
+  // `x-nonce`. Ainda não é usado por nenhum <script> aqui — fica disponível
+  // para a Task 6 (JSON-LD) e para qualquer <Script> futuro.
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  void nonce;
+
   return (
     <html lang="pt-BR" className={`${jost.variable} ${playfair.variable}`}>
       <body>
