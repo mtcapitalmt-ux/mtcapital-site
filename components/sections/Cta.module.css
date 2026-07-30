@@ -1,0 +1,11 @@
+/* Fonte: referencia/index.html:266-270 (.cta/.cta .eyebrow/.cta .h2/
+   .cta .lede/.cta > *), movida para o módulo da seção que a usa — mesmo
+   padrão das demais seções (ver Processo.module.css/Casos.module.css).
+   As sobrescritas de .eyebrow/.h2/.lede (classes globais de base.css)
+   usam :global(), mesma técnica de Processo.module.css
+   (.head :global(.eyebrow){color:var(--gold-lt)}). */
+.cta{position:relative;text-align:center;padding:clamp(96px,14vh,172px) var(--pad);overflow:hidden;background:var(--steel)}
+.cta :global(.eyebrow){justify-content:center;margin-bottom:26px;color:var(--gold-lt)}
+.cta :global(.h2){margin:0 auto;max-width:20ch}
+.cta :global(.lede){margin:26px auto 38px;text-align:center;color:rgba(245,241,234,.78)}
+.cta > *{position:relative;z-index:1}

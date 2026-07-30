@@ -11,6 +11,8 @@ import { Depoimentos } from "@/components/sections/Depoimentos";
 import { Equipe } from "@/components/sections/Equipe";
 import { Guia } from "@/components/sections/Guia";
 import { Faq } from "@/components/sections/Faq";
+import { Cta } from "@/components/sections/Cta";
+import { Rodape } from "@/components/sections/Rodape";
 
 export default function Home() {
   return (
@@ -28,8 +30,8 @@ export default function Home() {
       <Equipe />
       <Guia />
       <Faq />
-      {/* Demais seções (Cta, Rodape)
-          entram aqui, na ordem aprovada, pela Task 21. */}
+      <Cta />
+      <Rodape />
     </main>
   );
 }

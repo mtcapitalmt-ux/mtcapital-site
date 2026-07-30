@@ -6,6 +6,7 @@ import { config } from "@/content/config";
 import { validarConfig } from "@/lib/config-guard";
 import { Nav } from "@/components/sections/Nav";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
+import { WhatsAppFlutuante } from "@/components/ui/WhatsAppFlutuante";
 
 validarConfig(config);
 
@@ -43,6 +44,12 @@ export default function RootLayout({
         <SmoothScroll />
         <Nav />
         {children}
+        {/* Botão flutuante de WhatsApp: elemento de posição fixa, presente em
+            toda a página (como o <Nav /> acima), fora do fluxo de scroll do
+            conteúdo — por isso mora aqui e não em app/page.tsx. No HTML de
+            origem ele também é irmão do wrapper de scroll suave, não filho
+            dele (referencia/index.html:754-756, logo após o </footer>). */}
+        <WhatsAppFlutuante />
       </body>
     </html>
   );

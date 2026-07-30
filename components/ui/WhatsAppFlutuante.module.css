@@ -1,0 +1,6 @@
+/* Fonte: referencia/index.html:279-281 (.wa-float/.wa-float:hover/
+   .wa-float svg), movida para o módulo do próprio componente — mesmo
+   critério de escopo local usado nas seções (ver Cta.module.css). */
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:90;width:56px;height:56px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;box-shadow:0 12px 36px rgba(0,0,0,.45);transition:transform .35s var(--ease)}
+.wa-float:hover{transform:scale(1.09)}
+.wa-float svg{width:28px;height:28px}

@@ -1,0 +1,31 @@
+/* Fonte: referencia/index.html:271-280 (footer.site/.foot-grid/
+   .foot-grid h4/.foot-grid a,.foot-grid p/.foot-grid a:hover/.foot-bot),
+   movidas para o módulo da seção que as usa — mesmo padrão das demais
+   seções (ver Casos.module.css/Processo.module.css). A regra .disclaimer
+   já é global (ver comentário em styles/base.css, promovida pela Task 17
+   a partir de casos:612 + equipe/sócios:749) — por isso não é recriada
+   aqui, o rodapé só aplica a classe global.
+
+   O recorte responsivo de .foot-grid (index.html:293,299 — regra combinada
+   que também cobria .split/.captura/.planos/.casos/.pilares/.esp/.depos/
+   .socios/.esteira/.res-strip/.bignum/.etapa, cada um já recortado na sua
+   própria seção) é recriado localmente abaixo, com o nome de classe já
+   escopado pelo CSS Module — mesmo padrão de recorte usado em
+   Processo.module.css/Casos.module.css/Oportunidades.module.css. base.css
+   mantém intocada a entrada global equivalente de .foot-grid (mesma
+   convenção já adotada para .etapa/.casos/.res-strip nessas outras
+   seções): nenhum componente usa esses nomes de classe crus, então a
+   entrada em base.css nunca chega a casar com nada. */
+.site{padding:60px var(--pad) 34px;background:var(--navy-3);border-top:1px solid var(--line-d)}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;padding-bottom:48px}
+.foot-grid h4{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:400}
+.foot-grid a,.foot-grid p{display:block;color:rgba(245,241,234,.58);font-size:.92rem;margin-bottom:10px;transition:color .25s}
+.foot-grid a:hover{color:var(--gold-lt)}
+.foot-bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;padding-top:28px;border-top:1px solid var(--line-d);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.34)}
+
+@media(max-width:1080px){
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:760px){
+  .foot-grid{grid-template-columns:1fr}
+}
