@@ -1,0 +1,14 @@
+/* Layout específico da página de privacidade — reaproveita os tokens do
+   site (var(--line-d), var(--gold), var(--gold-lt)) e o mesmo padrão de
+   lista com divisórias já usado em Faq.module.css/Processo.module.css para
+   as seções numeradas. A única medida nova pedida pelo plano é a largura de
+   leitura do corpo do texto (max-width:68ch, tanto nas seções quanto na
+   nota final de atualização). */
+.secoes{border-top:1px solid var(--line-d);max-width:68ch;margin-top:48px}
+.secao{padding:28px 0;border-bottom:1px solid var(--line-d)}
+.secao p{color:rgba(245,241,234,.7);font-size:.96rem;line-height:1.7}
+.secao p + p{margin-top:14px}
+.secao a{color:var(--gold-lt);text-decoration:underline;text-underline-offset:3px}
+.secao a:hover{color:var(--gold)}
+
+.atualizado{margin-top:32px;max-width:68ch;font-size:11.5px;line-height:1.7;color:rgba(245,241,234,.5)}
