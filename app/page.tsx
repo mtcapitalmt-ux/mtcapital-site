@@ -13,8 +13,16 @@ import { Guia } from "@/components/sections/Guia";
 import { Faq } from "@/components/sections/Faq";
 import { Cta } from "@/components/sections/Cta";
 import { Rodape } from "@/components/sections/Rodape";
+import { listarImoveisAbertos } from "@/lib/imoveis";
 
-export default function Home() {
+// Server Component assíncrono: busca os imóveis publicados no ponto único de
+// leitura (lib/imoveis.ts) e repassa via prop para Oportunidades, que
+// continua um componente simples e testável — sem saber de onde os dados
+// vêm. Quando o painel administrativo existir, só o corpo de
+// listarImoveisAbertos muda; nem aqui, nem em Oportunidades.tsx.
+export default async function Home() {
+  const imoveis = await listarImoveisAbertos();
+
   return (
     <>
       <main id="conteudo">
@@ -25,7 +33,7 @@ export default function Home() {
         <Especialidades />
         <Esteira />
         <Processo />
-        <Oportunidades />
+        <Oportunidades imoveis={imoveis} />
         <Casos />
         <Depoimentos />
         <Equipe />
