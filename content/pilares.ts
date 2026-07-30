@@ -1,14 +1,14 @@
 // Fonte: referencia/index.html, linhas 368–394 (bloco .pilares)
 
 export interface Pilar {
-  rotulo: string
+  momento: string
   titulo: string
   itens: string[]
 }
 
 export const pilares: Pilar[] = [
   {
-    rotulo: 'Antes',
+    momento: 'Antes',
     titulo: 'Lemos o processo inteiro',
     itens: [
       'Descobrimos por que o imóvel foi parar em leilão',
@@ -17,7 +17,7 @@ export const pilares: Pilar[] = [
     ],
   },
   {
-    rotulo: 'Durante',
+    momento: 'Durante',
     titulo: 'Damos o lance com teto definido',
     itens: [
       'Cuidamos do cadastro e da documentação',
@@ -26,7 +26,7 @@ export const pilares: Pilar[] = [
     ],
   },
   {
-    rotulo: 'Depois',
+    momento: 'Depois',
     titulo: 'Entregamos a matrícula no seu nome',
     itens: [
       'Tiramos a carta de arrematação e pagamos o ITBI',

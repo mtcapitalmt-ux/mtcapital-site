@@ -69,6 +69,13 @@ export const textos = {
     lede: 'Você não precisa decidir nada hoje. Começa lendo, depois conversa, e só contrata quando fizer sentido.',
   } as Cabecalho,
 
+  // linhas 552–556 (.esteira-nota, abaixo do bloco .esteira)
+  esteiraNota: {
+    titulo: 'Por que existe uma taxa antes do resultado',
+    texto: 'Porque orientar alguém direito consome muitas horas de trabalho técnico, e nem toda conversa vira negócio. A taxa é um filtro: ela separa quem está pesquisando de quem está decidido. Quem paga recebe tempo de gente experiente, não atendimento de esteira. E se o negócio fechar, ela volta descontada.',
+    notaValores: 'Valores e percentual definidos em contrato após a reunião de diagnóstico, conforme a complexidade do processo e o valor do imóvel.',
+  },
+
   // linhas 561–566 (.sec-head da seção #processo)
   processoCabecalho: {
     eyebrow: 'Como funciona',
