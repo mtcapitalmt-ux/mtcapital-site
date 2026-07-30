@@ -32,6 +32,15 @@ Sem isso o site vai ao ar com dados de teste visíveis ao público.
 - **Domínio registrado** — confirmar que o domínio final (mtcapital.com.br ou equivalente)
   está registrado e configurado para apontar para o deploy de produção. O e-mail de contato
   em `content/config.ts` já assume `contato@mtcapital.com.br`.
+- **Credenciais de entrega dos leads do formulário do Guia** —
+  `components/ui/FormularioGuia.tsx` já registra o lead via `POST /api/lead` (Plano 2, Tasks
+  1–2), validado por `LeadSchema`, antes de abrir o WhatsApp; não é mais um stub. O que falta
+  é configurar um destino real de entrega: `RESEND_API_KEY` + `LEAD_EMAIL_DESTINO` (e-mail via
+  Resend) e/ou `LEAD_WEBHOOK_URL` (webhook para CRM/planilha/Zapier) em `.env.local` (dev) e
+  nas variáveis de ambiente de produção — ver `.env.example`. Neste ambiente de
+  desenvolvimento nenhum dos dois está configurado; sem ao menos um, `/api/lead` responde 500
+  e o formulário orienta o visitante a falar direto no WhatsApp. Configurar ao menos um
+  destino real antes do lançamento.
 
 ## Definições comerciais
 
@@ -55,12 +64,6 @@ com segurança.
 - **Praças de atuação** — o FAQ responde "Em leilões de todo o Brasil" quando perguntado onde
   a empresa atua. Confirmar se isso reflete a realidade atual da operação ou se deveria ser
   restrito a praças/estados específicos.
-- **Destino dos leads do formulário do Guia** — `components/ui/FormularioGuia.tsx` hoje é um
-  stub: o botão "QUERO O GUIA" não envia os dados a lugar nenhum (não é chamada de rede, não
-  grava nada). Antes do lançamento é preciso decidir o destino real dos leads capturados
-  (e-mail, planilha, CRM) e implementar a submissão de fato — isso é trabalho de código, não
-  cabe nesta tarefa de conferência, mas fica registrado aqui como bloqueio funcional do
-  formulário. (O Plano 2 deste projeto cobre captura de lead e consentimento.)
 
 ## Importantes, não bloqueantes
 
