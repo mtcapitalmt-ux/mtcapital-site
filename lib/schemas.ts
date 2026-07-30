@@ -1,6 +1,6 @@
-﻿import { z } from 'zod'
+import { z } from 'zod'
 
-export const TIPOS_IMOVEL = ['Casa', 'Apartamento', 'Terreno', 'GalpÃ£o', 'Sala'] as const
+export const TIPOS_IMOVEL = ['Casa', 'Apartamento', 'Terreno', 'Galpão', 'Sala'] as const
 
 export const CasoSchema = z.object({
   id: z.string().min(1),
@@ -18,7 +18,7 @@ export const CasoSchema = z.object({
   publicado: z.boolean(),
 }).refine(
   (c) => !c.publicado || (c.avaliacao > 0 && c.arremate > 0),
-  { message: 'Regra da marca: caso publicado exige avaliaÃ§Ã£o e arremate preenchidos.' },
+  { message: 'Regra da marca: caso publicado exige avaliação e arremate preenchidos.' },
 )
 
 const LanceSchema = z.object({
