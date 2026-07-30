@@ -8,6 +8,11 @@ export function ContadorAnimado({ valor, prefixo = '', sufixo = '' }: { valor: n
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    // matchMedia não existe no SSR; só pode ser lido no cliente após o mount.
+    // Um initializer preguiçoso no useState quebraria no servidor ou causaria
+    // mismatch de hidratação, então o padrão effect+setState aqui é o tradeoff
+    // correto (um render extra inofensivo, apenas para quem prefere menos movimento).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { setAtual(valor); return }
 
     const io = new IntersectionObserver((es) => {
