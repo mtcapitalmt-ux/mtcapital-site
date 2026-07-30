@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "verificar": "vitest run && eslint . && next build"
   },
   "dependencies": {
     "lenis": "^1.3.25",
