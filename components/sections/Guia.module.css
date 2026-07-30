@@ -1,0 +1,33 @@
+/* Fonte: referencia/index.html:244-252 (regras .captura/.cap-form/.cap-form
+   input/.cap-form input::placeholder/.cap-form input:focus/.cap-form .btn/
+   .cap-msg/.cap-note), movidas para o módulo da seção que as usa — mesmo
+   padrão de Equipe.module.css/Processo.module.css. */
+.captura{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px);align-items:center}
+.cap-form{display:flex;flex-direction:column;gap:16px}
+.cap-form input{background:transparent;border:0;border-bottom:1px solid var(--line-d);padding:14px 2px;font-size:1rem;font-weight:300;transition:border-color .3s}
+.cap-form input::placeholder{color:rgba(245,241,234,.38)}
+.cap-form input:focus{outline:none;border-color:var(--gold)}
+.cap-form :global(.btn){align-self:flex-start;margin-top:12px}
+.cap-msg{font-size:11.5px;color:var(--gold-lt);min-height:18px}
+.cap-note{font-size:11px;line-height:1.7;color:rgba(245,241,234,.4);max-width:46ch}
+
+/* index.html:677,679 — color:var(--gold-lt)/margin-bottom:24px no eyebrow e
+   color:rgba(245,241,234,.78)/margin-top:22px no lede são inline no HTML de
+   origem, específicos deste cabeçalho (a coluna de texto é uma <div> sem
+   classe no original — .texto existe só como gancho de escopo do CSS module,
+   sem efeito visual próprio) — mesmo padrão de escopo local usado em
+   Processo.module.css (.head :global(.eyebrow)/:global(.lede)). */
+.texto :global(.eyebrow){color:var(--gold-lt);margin-bottom:24px}
+.texto :global(.lede){color:rgba(245,241,234,.78);margin-top:22px}
+
+/* index.html:680 — margin-top:20px inline no primeiro .cap-note (o segundo,
+   dentro do .cap-form, não tem estilo inline — index.html:688 — o espaçamento
+   dele já vem do gap:16px do flex em .cap-form). */
+.texto .cap-note{margin-top:20px}
+
+/* index.html:292 — recorte de .captura do bloco responsivo de 1080px (o
+   outro seletor dessa regra, .split, pertence a Esclarecimentos.module.css,
+   já portado lá — mesmo padrão de recorte usado em Esteira.module.css). */
+@media(max-width:1080px){
+  .captura{grid-template-columns:1fr}
+}
