@@ -17,6 +17,13 @@ import s from './privacidade.module.css'
 export const metadata: Metadata = {
   title: 'Política de privacidade',
   description: 'Como a MT Capital coleta, usa e protege os dados de quem entra em contato pelo site.',
+  // Sem isto, a página herdava `alternates.canonical: "/"` de app/layout.tsx
+  // (o layout raiz define um canonical global para a home) e declarava a
+  // própria home como sua URL canônica — uma autocontradição frente ao
+  // sitemap (app/sitemap.ts, que lista /privacidade como URL indexável
+  // própria) e ao `robots: {index: true}` logo abaixo, que faria o Google
+  // tender a descartar a página do índice.
+  alternates: { canonical: '/privacidade' },
   robots: { index: true, follow: true },
 }
 

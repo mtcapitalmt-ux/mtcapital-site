@@ -18,6 +18,12 @@
 .cap-form :global(.btn){align-self:flex-start;margin-top:12px}
 .cap-form :global(.btn):disabled{opacity:.6;cursor:default;transform:none}
 .cap-msg{font-size:11.5px;color:var(--gold-lt);min-height:18px}
+/* Achado 6 da revisão final do Plano 2: quando o pop-up do WhatsApp é
+   bloqueado, .cap-msg passa a envolver um <a> (FormularioGuia.tsx) em vez de
+   texto solto. Como styles/base.css zera a{color:inherit;text-decoration:
+   none} globalmente, sem esta regra o link ficaria visualmente idêntico ao
+   texto ao redor — mesmo raciocínio já aplicado abaixo em .consentimento a. */
+.cap-msg-link{text-decoration:underline;cursor:pointer}
 .cap-note{font-size:11px;line-height:1.7;color:rgba(245,241,234,.4);max-width:46ch}
 
 /* Task 2, Plano 2: caixa de consentimento LGPD do formulário do guia — não

@@ -58,7 +58,7 @@ export const privacidade: Privacidade = {
     {
       titulo: '4. Com quem compartilhamos',
       paragrafos: [
-        'Compartilhamos os dados do formulário só com o serviço de e-mail que entrega a mensagem até a nossa equipe — o intermediário técnico necessário para o contato chegar.',
+        'Compartilhamos os dados do formulário só com prestadores de serviço que atuam como intermediários técnicos para o contato chegar até a nossa equipe: o serviço de e-mail que entrega a mensagem e, quando configurada, uma ferramenta de automação/CRM usada para organizar o contato comercial com quem pede o guia.',
         'Não vendemos, alugamos nem cedemos sua lista de contatos a mais ninguém, por nenhum motivo.',
       ],
     },

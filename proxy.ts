@@ -41,7 +41,22 @@ export function proxy(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set("x-nonce", nonce);
 
+  // A CSP precisa ir tanto no cabeçalho de REQUISIÇÃO quanto no de resposta
+  // — é assim que o exemplo oficial do Next.js documenta o padrão, porque o
+  // próprio renderer do Next lê o nonce daquele contrato de cabeçalho de
+  // requisição para os <script> que ele injeta (chunks do framework,
+  // hidratação — ou seja, toda a interatividade do site: scroll suave,
+  // acordeão do FAQ, o formulário de lead). Em ambiente local isso funciona
+  // mesmo só com o cabeçalho de resposta por um espelhamento interno do
+  // roteador de dev, que não é garantido no caminho de execução real do
+  // middleware/proxy no edge da Vercel — sem isto aqui, a CSP com
+  // 'strict-dynamic' bloquearia silenciosamente todo script injetado pelo
+  // Next em produção, quebrando o site inteiro sem nenhum aviso local.
+  requestHeaders.set("Content-Security-Policy", csp);
+
   const res = NextResponse.next({ request: { headers: requestHeaders } });
+  // Mantém também no cabeçalho de resposta: é o que o navegador de fato lê
+  // para aplicar a política à página entregue.
   res.headers.set("Content-Security-Policy", csp);
   return res;
 }

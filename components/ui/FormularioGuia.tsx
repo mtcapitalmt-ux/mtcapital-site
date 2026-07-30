@@ -15,29 +15,19 @@
 // Task 2 do Plano 2 (este arquivo): o componente ganha 'use client' porque
 // agora tem estado de verdade (envio/sucesso/erro) e um handler de submit —
 // a Task 19 deixou isso de propósito para não construir estado que seria
-// descartado. Três coisas novas:
-//
-// 1) Um <form> de verdade (referencia/index.html:682-688 não tinha um —
-//    era uma <div class="cap-form">). O onSubmit precisa de um elemento
-//    <form> para dar preventDefault() e ler FormData; a classe cap-form
-//    (flex/gap do layout) migrou do wrapper Reveal para este <form>, e o
-//    Reveal passou a envolver só a animação de entrada.
-// 2) O campo-armadilha (armadilha): invisível a quem enxerga (fora da tela
-//    via position:absolute), presente no DOM para robôs que preenchem tudo.
-//    A API (Plano 2, Task 1) descarta silenciosamente qualquer envio com
-//    esse campo não vazio, sem devolver 400 — um erro de validação
-//    ensinaria ao robô qual campo esvaziar para passar.
-// 3) A caixa de consentimento: não pré-marcada, texto nomeando o que é
-//    coletado (nome, telefone, e-mail) e para quê (enviar o guia, retomar
-//    contato sobre assessoria em leilão) — é a base legal LGPD da coleta,
-//    não decoração. `required` faz o navegador barrar o envio sem marcar;
-//    a API valida de novo do lado do servidor (LeadSchema, lib/schemas.ts),
-//    porque `required` é só client-side.
+// descartado.
 //
 // A ordem do envio importa: primeiro o POST para /api/lead (Plano 2, Task 1)
-// registra o contato; só depois de um 200 é que o WhatsApp abre. Assim o
-// contato existe mesmo que a pessoa feche a aba sem mandar a mensagem —
-// o inverso (abrir o WhatsApp antes) perderia o lead se ela desistir.
+// registra o contato; só depois de um 200 é que o WhatsApp abre.
+//
+// Achado 6 da revisão final do Plano 2: `window.open` depende de uma
+// "interação recente do usuário" para não ser barrado por bloqueador de
+// pop-up — e o round-trip do fetch acima (pior em conexão móvel lenta) pode
+// estourar essa janela. Sem checar o retorno de `window.open`, a tela diria
+// "Abrindo o WhatsApp..." e nada abriria: uma falha silenciosa bem no único
+// passo de conversão do site. Por isso capturamos o retorno; se vier nulo
+// (pop-up bloqueado), a mensagem de sucesso vira, ela mesma, um link real
+// para o mesmo WhatsApp — ver `linkBloqueado` abaixo.
 import { useState, type FormEvent } from 'react'
 import Link from 'next/link'
 import { Reveal } from '@/components/ui/Reveal'
@@ -64,11 +54,17 @@ function extrairErro(json: unknown): string | undefined {
 export function FormularioGuia() {
   const [estado, setEstado] = useState<Estado>('ocioso')
   const [mensagem, setMensagem] = useState('')
+  // Preenchido só quando o POST deu certo mas o `window.open` do WhatsApp
+  // voltou nulo/undefined (pop-up bloqueado) — nesse caso a mensagem de
+  // sucesso passa a ser renderizada como link clicável para este endereço,
+  // em vez de texto solto, para o envio não terminar num beco sem saída.
+  const [linkBloqueado, setLinkBloqueado] = useState<string | null>(null)
 
   async function enviar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setEstado('enviando')
     setMensagem('Registrando seu contato…')
+    setLinkBloqueado(null)
 
     const form = e.currentTarget
     const dados = Object.fromEntries(new FormData(form))
@@ -92,9 +88,18 @@ export function FormularioGuia() {
         return
       }
 
+      const destino = linkWhatsApp(mensagemGuia(String(dados.nome)))
+      const janela = window.open(destino, '_blank', 'noopener,noreferrer')
+
       setEstado('ok')
-      setMensagem('Pronto! Abrindo o WhatsApp para enviarmos o guia.')
-      window.open(linkWhatsApp(mensagemGuia(String(dados.nome))), '_blank', 'noopener,noreferrer')
+      if (janela) {
+        setMensagem('Pronto! Abrindo o WhatsApp para enviarmos o guia.')
+      } else {
+        // Pop-up bloqueado: nada abriu sozinho. `linkBloqueado` faz a
+        // mensagem virar um link real para a pessoa completar a ação.
+        setMensagem('Pronto! Toque aqui para abrir o WhatsApp e receber o guia.')
+        setLinkBloqueado(destino)
+      }
     } catch {
       setEstado('erro')
       setMensagem('Falha de conexão. Fale com a gente no WhatsApp que enviamos o guia.')
@@ -113,7 +118,7 @@ export function FormularioGuia() {
         <label htmlFor="email" className="sr-only">E-mail</label>
         <input id="email" name="email" type="email" placeholder="E-mail" autoComplete="email" />
 
-        {/* Campo-armadilha: ver nota (2) no comentário do topo do arquivo. */}
+        {/* Campo-armadilha: ver comentário do topo do arquivo. */}
         <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px' }}>
           <label htmlFor="armadilha">Não preencha este campo</label>
           <input id="armadilha" name="armadilha" type="text" tabIndex={-1} autoComplete="off" />
@@ -132,7 +137,20 @@ export function FormularioGuia() {
           {estado === 'enviando' ? 'Enviando…' : 'Quero o guia'}
         </button>
 
-        <p className={s['cap-msg']} aria-live="polite">{mensagem}</p>
+        <p className={s['cap-msg']} aria-live="polite">
+          {linkBloqueado ? (
+            <a
+              href={linkBloqueado}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={s['cap-msg-link']}
+            >
+              {mensagem}
+            </a>
+          ) : (
+            mensagem
+          )}
+        </p>
 
         <p className={s['cap-note']}>
           Ao enviar, registramos seu contato e abrimos o WhatsApp para mandar o PDF. Não mandamos
