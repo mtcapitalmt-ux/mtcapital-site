@@ -2,9 +2,10 @@ export const config = {
   marca: 'MT Capital',
   assinatura: 'Assessoria em Investimento e Negócios',
 
-  // PENDENTE — preencher antes de publicar. Placeholder derruba o build de produção.
-  whatsapp: '5511000000000',   // DDI+DDD+número, apenas dígitos
-  telefone: '(11) 0000-0000',
+  // PENDENTE — número de teste temporário (não é o número real da empresa).
+  // Ver docs/PENDENCIAS.md: precisa ser trocado pelo contato real antes do lançamento.
+  whatsapp: '5511999999999',   // DDI+DDD+número, apenas dígitos
+  telefone: '(11) 99999-9999',
 
   email: 'contato@mtcapital.com.br',
   endereco: {
