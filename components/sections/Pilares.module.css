@@ -1,0 +1,8 @@
+.pilares{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-d);border-block:1px solid var(--line-d)}
+.pilar{background:var(--navy);padding:clamp(28px,3.4vw,44px);display:flex;flex-direction:column;gap:16px}
+.pilar :global(.label){margin-bottom:2px}
+.pilar p{font-size:.95rem;color:rgba(245,241,234,.66)}
+.pilar ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:4px}
+.pilar li{padding-left:20px;position:relative;font-size:.92rem;color:rgba(245,241,234,.66)}
+.pilar li::before{content:"";position:absolute;left:0;top:.62em;width:9px;height:1px;background:var(--gold)}
+@media(max-width:1080px){.pilares{grid-template-columns:1fr}}
