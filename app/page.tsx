@@ -5,6 +5,7 @@ import { Mitos } from "@/components/sections/Mitos";
 import { Especialidades } from "@/components/sections/Especialidades";
 import { Esteira } from "@/components/sections/Esteira";
 import { Processo } from "@/components/sections/Processo";
+import { Oportunidades } from "@/components/sections/Oportunidades";
 
 export default function Home() {
   return (
@@ -16,9 +17,9 @@ export default function Home() {
       <Especialidades />
       <Esteira />
       <Processo />
-      {/* Demais seções (Oportunidades,
-          Casos, Depoimentos, Equipe, Guia, Faq, Cta, Rodape) entram aqui,
-          na ordem aprovada, pelas Tasks 16-21. */}
+      <Oportunidades />
+      {/* Demais seções (Casos, Depoimentos, Equipe, Guia, Faq, Cta, Rodape)
+          entram aqui, na ordem aprovada, pelas Tasks 17-21. */}
     </main>
   );
 }
