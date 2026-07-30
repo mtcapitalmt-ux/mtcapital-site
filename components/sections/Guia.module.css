@@ -4,12 +4,35 @@
    padrão de Equipe.module.css/Processo.module.css. */
 .captura{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,80px);align-items:center}
 .cap-form{display:flex;flex-direction:column;gap:16px}
-.cap-form input{background:transparent;border:0;border-bottom:1px solid var(--line-d);padding:14px 2px;font-size:1rem;font-weight:300;transition:border-color .3s}
-.cap-form input::placeholder{color:rgba(245,241,234,.38)}
-.cap-form input:focus{outline:none;border-color:var(--gold)}
+/* :not([type="checkbox"]) acrescentado na Task 2 do Plano 2: sem essa
+   exclusão, a caixa de consentimento (novo <input type="checkbox">, ver
+   .consentimento abaixo) herdaria border:0/padding:14px 2px pensados para
+   os campos de texto e perderia a aparência nativa de caixa de marcar. Pelo
+   mesmo motivo, :focus não zera o outline nela — sem border-bottom visível
+   para servir de indicador de foco (como nos inputs de texto), ela precisa
+   do outline padrão de :focus-visible (styles/base.css) para continuar
+   navegável por teclado (Task 7, Plano 1). */
+.cap-form input:not([type="checkbox"]){background:transparent;border:0;border-bottom:1px solid var(--line-d);padding:14px 2px;font-size:1rem;font-weight:300;transition:border-color .3s}
+.cap-form input:not([type="checkbox"])::placeholder{color:rgba(245,241,234,.38)}
+.cap-form input:not([type="checkbox"]):focus{outline:none;border-color:var(--gold)}
 .cap-form :global(.btn){align-self:flex-start;margin-top:12px}
+.cap-form :global(.btn):disabled{opacity:.6;cursor:default;transform:none}
 .cap-msg{font-size:11.5px;color:var(--gold-lt);min-height:18px}
 .cap-note{font-size:11px;line-height:1.7;color:rgba(245,241,234,.4);max-width:46ch}
+
+/* Task 2, Plano 2: caixa de consentimento LGPD do formulário do guia — não
+   pré-marcada (ver components/ui/FormularioGuia.tsx), caixa em --gold
+   (accent-color, o jeito padrão de tingir um checkbox nativo) e texto no
+   mesmo tamanho/entrelinha/cor do .cap-note, já no valor de contraste
+   alvo da Task 7 (rgba(245,241,234,.56) ≈ 5,4:1 sobre --navy, WCAG AA com
+   folga — .cap-note acima ainda está em .4 porque corrigi-lo é escopo da
+   própria Task 7, não desta tarefa). O link para /privacidade ganha cor e
+   sublinhado próprios porque a{color:inherit;text-decoration:none} global
+   (styles/base.css) o deixaria idêntico ao texto ao redor, sem indicação visual de que é um link. */
+.consentimento{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.consentimento input[type="checkbox"]{margin-top:3px;width:16px;height:16px;flex:none;accent-color:var(--gold)}
+.consentimento span{font-size:11px;line-height:1.7;color:rgba(245,241,234,.56)}
+.consentimento a{color:var(--gold-lt);text-decoration:underline}
 
 /* index.html:677,679 — color:var(--gold-lt)/margin-bottom:24px no eyebrow e
    color:rgba(245,241,234,.78)/margin-top:22px no lede são inline no HTML de
