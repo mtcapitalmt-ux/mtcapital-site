@@ -8,6 +8,7 @@ import { validarConfig } from "@/lib/config-guard";
 import { Nav } from "@/components/sections/Nav";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { WhatsAppFlutuante } from "@/components/ui/WhatsAppFlutuante";
+import { DadosEstruturados } from "@/components/seo/DadosEstruturados";
 
 validarConfig(config);
 
@@ -27,11 +28,28 @@ const playfair = localFont({
   variable: "--font-serif",
 });
 
+const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://mtcapital.com.br";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://mtcapital.com.br"),
-  title: "MT Capital — Assessoria em Leilão de Imóveis e Terrenos",
+  metadataBase: new URL(site),
+  title: {
+    default: "MT Capital — Assessoria em Leilão de Imóveis e Terrenos",
+    template: "%s — MT Capital",
+  },
   description:
     "Assessoria em leilão de imóveis e terrenos. Lemos o processo, calculamos o custo real da operação e dizemos até quanto vale a pena pagar. Do edital ao registro da matrícula.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    url: "/",
+    siteName: "MT Capital",
+    title: "MT Capital — Comprar bem começa antes do lance",
+    description:
+      "Comprar bem começa antes do lance. Analisamos o processo, calculamos o custo real e conduzimos tudo, do pregão ao registro.",
+  },
+  twitter: { card: "summary_large_image" },
+  robots: { index: true, follow: true },
 };
 
 export default async function RootLayout({
@@ -40,10 +58,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   // Nonce por requisição, gerado em `proxy.ts` e repassado via cabeçalho
-  // `x-nonce`. Ainda não é usado por nenhum <script> aqui — fica disponível
-  // para a Task 6 (JSON-LD) e para qualquer <Script> futuro.
+  // `x-nonce`. Usado abaixo no <script> de dados estruturados (JSON-LD) para
+  // que a CSP (`script-src 'nonce-...'`) não bloqueie o script.
   const nonce = (await headers()).get("x-nonce") ?? undefined;
-  void nonce;
 
   return (
     <html lang="pt-BR" className={`${jost.variable} ${playfair.variable}`}>
@@ -58,6 +75,7 @@ export default async function RootLayout({
             origem ele também é irmão do wrapper de scroll suave, não filho
             dele (referencia/index.html:754-756, logo após o </footer>). */}
         <WhatsAppFlutuante />
+        <DadosEstruturados nonce={nonce} />
       </body>
     </html>
   );
