@@ -10,6 +10,7 @@ import { Casos } from "@/components/sections/Casos";
 import { Depoimentos } from "@/components/sections/Depoimentos";
 import { Equipe } from "@/components/sections/Equipe";
 import { Guia } from "@/components/sections/Guia";
+import { Faq } from "@/components/sections/Faq";
 
 export default function Home() {
   return (
@@ -26,8 +27,9 @@ export default function Home() {
       <Depoimentos />
       <Equipe />
       <Guia />
-      {/* Demais seções (Faq, Cta, Rodape)
-          entram aqui, na ordem aprovada, pelas Tasks 20-21. */}
+      <Faq />
+      {/* Demais seções (Cta, Rodape)
+          entram aqui, na ordem aprovada, pela Task 21. */}
     </main>
   );
 }

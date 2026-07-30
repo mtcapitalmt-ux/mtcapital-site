@@ -1,0 +1,25 @@
+/* Fonte: referencia/index.html:254-263 (regras .faq/.faq-item/.faq-q/
+   .faq-q:hover/.faq-q::after/.faq-q::before/.faq-item.open .faq-q::before/
+   .faq-a/.faq-a p), movidas para o módulo da seção que as usa — mesmo padrão
+   das demais seções (ver Guia.module.css/Depoimentos.module.css).
+
+   Desvio deliberado e intencional (é o próprio objetivo desta task): a regra
+   original `.faq-a{max-height:0;overflow:hidden;transition:max-height .5s
+   var(--ease)}` foi substituída pela técnica de grid animado abaixo
+   (`grid-template-rows: 0fr` -> `1fr`, com o conteúdo real dentro de uma
+   segunda camada `overflow:hidden`). Ela corrige o bug do original — a altura
+   ficava medida uma vez via `scrollHeight` no clique e não se atualizava se o
+   viewport mudasse (ex.: girar o celular) com uma resposta aberta, cortando o
+   texto — sem precisar medir nada em JS, então nunca fica obsoleta. Todo o
+   resto do bloco é verbatim. */
+.faq{border-top:1px solid var(--line-d);max-width:940px}
+.faq-item{border-bottom:1px solid var(--line-d)}
+.faq-q{width:100%;background:none;border:0;text-align:left;cursor:pointer;padding:27px 46px 27px 0;position:relative;font-family:var(--serif);font-weight:500;font-size:clamp(1.05rem,1.8vw,1.32rem);line-height:1.3;transition:color .3s}
+.faq-q:hover{color:var(--gold-lt)}
+.faq-q::after{content:"";position:absolute;right:6px;top:50%;width:14px;height:1px;background:var(--gold)}
+.faq-q::before{content:"";position:absolute;right:12.5px;top:50%;width:1px;height:14px;background:var(--gold);transform:translateY(-50%);transition:transform .4s var(--ease)}
+.faq-item.open .faq-q::before{transform:translateY(-50%) scaleY(0)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-a > div{overflow:hidden}
+.faq-a p{padding:0 0 30px;color:rgba(245,241,234,.66);max-width:68ch;font-size:.95rem}
