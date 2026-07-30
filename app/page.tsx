@@ -7,6 +7,8 @@ import { Esteira } from "@/components/sections/Esteira";
 import { Processo } from "@/components/sections/Processo";
 import { Oportunidades } from "@/components/sections/Oportunidades";
 import { Casos } from "@/components/sections/Casos";
+import { Depoimentos } from "@/components/sections/Depoimentos";
+import { Equipe } from "@/components/sections/Equipe";
 
 export default function Home() {
   return (
@@ -20,8 +22,10 @@ export default function Home() {
       <Processo />
       <Oportunidades />
       <Casos />
-      {/* Demais seções (Depoimentos, Equipe, Guia, Faq, Cta, Rodape)
-          entram aqui, na ordem aprovada, pelas Tasks 18-21. */}
+      <Depoimentos />
+      <Equipe />
+      {/* Demais seções (Guia, Faq, Cta, Rodape)
+          entram aqui, na ordem aprovada, pelas Tasks 19-21. */}
     </main>
   );
 }

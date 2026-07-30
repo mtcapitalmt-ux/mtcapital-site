@@ -1,0 +1,25 @@
+/* Fonte: referencia/index.html:235-242 (regras .socios/.socio/.socio-foto/
+   .socio-foto img/.socio-foto span/.socio-body/.socio-body p), movidas para
+   o módulo da seção que as usa — mesmo padrão de Casos.module.css/
+   Depoimentos.module.css. */
+.socios{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.socio{display:grid;grid-template-columns:150px 1fr;gap:26px;border:1px solid var(--line-d);padding:26px;align-items:start}
+.socio-foto{aspect-ratio:3/4;background:var(--navy-3);display:grid;place-items:center;overflow:hidden}
+.socio-foto img{width:100%;height:100%;object-fit:cover}
+.socio-foto span{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(245,241,234,.28);text-align:center;padding:8px}
+.socio-body{display:flex;flex-direction:column;gap:12px}
+.socio-body p{font-size:.93rem;color:rgba(245,241,234,.66)}
+
+/* index.html:293 — recorte de .socios do bloco responsivo de 1080px, e
+   index.html:306,308 — recorte de .socio e .socio-foto do bloco de 760px
+   (os outros seletores dessas regras combinadas — .planos/.casos/.pilares/
+   .esp/.depos/.mito/.esteira — pertencem a outras seções, já portados ou a
+   portar nelas — mesmo padrão de recorte usado em Casos.module.css/
+   Depoimentos.module.css). */
+@media(max-width:1080px){
+  .socios{grid-template-columns:1fr}
+}
+@media(max-width:760px){
+  .socio{grid-template-columns:1fr;gap:12px}
+  .socio-foto{max-width:180px}
+}

@@ -1,0 +1,19 @@
+/* Fonte: referencia/index.html:226-233 (regras .depos/.depo/.depo .aspas/
+   .depo blockquote/.depo footer/.depo cite/.depo small), movidas para o
+   módulo da seção que as usa — mesmo padrão de Casos.module.css/
+   Oportunidades.module.css. */
+.depos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.depo{border:1px solid var(--line-l);padding:clamp(26px,3vw,38px);display:flex;flex-direction:column;gap:20px}
+.aspas{font-family:var(--serif);font-size:3rem;line-height:.6;color:var(--gold);height:24px}
+.depo blockquote{font-size:.95rem;line-height:1.7;color:rgba(25,35,50,.75);flex:1}
+.depo footer{margin-top:auto;padding-top:18px;border-top:1px solid var(--line-l);background:none;padding-inline:0}
+.depo cite{font-style:normal;font-family:var(--serif);font-weight:500;font-size:1.02rem;display:block;color:var(--navy)}
+.depo small{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel);display:block;margin-top:6px}
+
+/* index.html:293 — recorte de .depos do bloco responsivo de 1080px (os
+   outros seletores dessa regra combinada — .planos/.pilares/.esp/.casos/
+   .socios — pertencem a outras seções, já portados ou a portar nelas —
+   mesmo padrão de recorte usado em Casos.module.css/Processo.module.css) */
+@media(max-width:1080px){
+  .depos{grid-template-columns:1fr}
+}
