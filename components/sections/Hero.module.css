@@ -1,0 +1,32 @@
+/* Fonte: referencia/index.html:81-95 (bloco HERO).
+   Classes globais compartilhadas (.eyebrow, .h1, em.mark, .lede, .btn,
+   .btn-ghost, .band, .tab) permanecem em styles/base.css e sao referenciadas
+   aqui via :global() apenas onde o seletor original as aninha. */
+
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--pad);overflow:hidden}
+.hero-inner{position:relative;z-index:2;padding:24vh 0 clamp(34px,6vh,64px);width:100%}
+.hero :global(.eyebrow){margin-bottom:30px}
+.hero :global(.h1){max-width:17ch}
+.hero-sub{margin-top:32px;display:flex;flex-wrap:wrap;gap:32px;align-items:flex-end;justify-content:space-between}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.bignum{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-d)}
+.bignum div{padding:26px 22px 30px 0;border-right:1px solid var(--line-d)}
+.bignum div:last-child{border-right:0}
+.bignum .k{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3vw,2.5rem);line-height:1;color:var(--gold-lt)}
+.bignum .v{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,234,.5);margin-top:11px;font-weight:400}
+.scroll-cue{position:absolute;bottom:24px;right:var(--pad);z-index:3;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,234,.42);display:flex;align-items:center;gap:12px}
+.scroll-cue i{display:block;width:1px;height:36px;background:linear-gradient(var(--gold),transparent);animation:cue 2.4s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* index.html:296-298 — recorte de .bignum do bloco responsivo de 1080px */
+@media(max-width:1080px){
+  .bignum{grid-template-columns:1fr 1fr}
+  .bignum div{border-bottom:1px solid var(--line-d)}
+  .bignum div:nth-child(2n){border-right:0}
+}
+/* index.html:305 — recorte de .scroll-cue do bloco responsivo de 760px
+   (os outros seletores dessa regra, .nav-links e .op-float, pertencem a
+   outras secoes e ja foram/serao portados nelas) */
+@media(max-width:760px){
+  .scroll-cue{display:none}
+}
