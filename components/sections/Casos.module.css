@@ -1,0 +1,57 @@
+/* Fonte: referencia/index.html:195-224 (regras .casos/.caso/.caso-img/
+   .caso-img img/.caso:hover .caso-img img/.caso-ph/.caso-body/.caso-nums/
+   .caso-nums div/.caso-nums span/.caso-nums b/.caso-nums .up b/.caso p/
+   .res-strip/.res-strip div/.res-strip .k/.res-strip .v/.res-filtros/
+   .res-filtros button/.res-filtros button:hover/.res-filtros button.on/
+   .caso-lucro/.caso-lucro b/.caso-lucro span/.caso-badge/.caso-img{position:
+   relative} (segunda declaração, mesmo seletor — consolidada aqui numa só
+   regra)/.casos-vazio), movidas para o módulo da seção que as usa — mesmo
+   padrão de Processo.module.css/Oportunidades.module.css. */
+.casos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.caso{border:1px solid var(--line-d);display:flex;flex-direction:column;overflow:hidden}
+.caso-img{position:relative;aspect-ratio:4/3;background:var(--navy);overflow:hidden;display:grid;place-items:center}
+.caso-img img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.caso:hover .caso-img img{transform:scale(1.05)}
+.caso-ph{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:rgba(245,241,234,.28)}
+.caso-body{padding:26px 24px 28px;display:flex;flex-direction:column;gap:12px;flex:1}
+.caso-nums{display:flex;flex-wrap:wrap;gap:18px 26px;margin-top:auto;padding-top:18px;border-top:1px solid var(--line-d)}
+.caso-nums div{display:flex;flex-direction:column;gap:5px}
+.caso-nums span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.42)}
+.caso-nums b{font-family:var(--serif);font-weight:500;font-size:1.15rem;font-variant-numeric:tabular-nums}
+.caso-nums .up b{color:var(--gold-lt)}
+.caso p{font-size:.92rem;color:rgba(245,241,234,.65)}
+
+.res-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-d);border:1px solid var(--line-d);margin-bottom:34px}
+.res-strip div{background:var(--navy-2);padding:22px 20px}
+.res-strip .k{font-family:var(--serif);font-weight:500;font-size:clamp(1.3rem,2.3vw,1.9rem);line-height:1;color:var(--gold-lt);font-variant-numeric:tabular-nums}
+.res-strip .v{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,234,.45);margin-top:10px}
+.res-filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+.res-filtros button{background:none;border:1px solid var(--line-d);padding:9px 18px;cursor:pointer;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(245,241,234,.6);transition:all .3s var(--ease)}
+.res-filtros button:hover{border-color:var(--gold);color:var(--gold-lt)}
+.res-filtros button.on{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:500}
+.caso-lucro{display:flex;align-items:baseline;gap:10px;padding:14px 0 0;margin-top:14px;border-top:1px solid var(--line-d)}
+.caso-lucro b{font-family:var(--serif);font-weight:500;font-size:1.35rem;color:var(--gold-lt);font-variant-numeric:tabular-nums}
+.caso-lucro span{font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.45)}
+.caso-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--navy);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;font-weight:500;z-index:2}
+.casos-vazio{border:1px solid var(--line-d);padding:clamp(30px,5vw,54px);color:rgba(245,241,234,.55)}
+
+/* Sem equivalente na origem: o parágrafo do aviso legal (index.html:612) é
+   um <p class="disclaimer rv" style="margin-top:34px"> ali — um único
+   elemento carregando classe global + reveal + margem inline. Aqui o Reveal
+   (components/ui/Reveal.tsx) sempre renderiza sua própria tag (div, por
+   padrão) por fora do conteúdo — mesmo padrão já usado para .eyebrow/.lede
+   em todas as outras seções (ver Oportunidades.tsx, Processo.tsx etc.), que
+   trocam <p>/<h2> por <div> sem perda visual. Por isso a margem que era
+   inline no original vira esta classe local, aplicada ao wrapper do Reveal.
+*/
+.aviso{margin-top:34px}
+
+/* index.html:293,295 — recorte de .casos e .res-strip do bloco responsivo de
+   1080px (os outros seletores da primeira regra combinada — .planos/
+   .pilares/.esp/.depos/.socios — pertencem a outras seções, já portados ou a
+   portar nelas — mesmo padrão de recorte usado em Processo.module.css/
+   Esteira.module.css) */
+@media(max-width:1080px){
+  .casos{grid-template-columns:1fr}
+  .res-strip{grid-template-columns:1fr 1fr}
+}
