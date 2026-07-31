@@ -71,3 +71,32 @@ publicado:false:
 Nenhum. Toda diferença encontrada nesta conferência está coberta pela tabela de mudanças
 autorizadas do brief da Task 22, ou é texto placeholder idêntico herdado do modelo aprovado
 (Depoimentos, Equipe, valores de contato de teste em content/config.ts).
+
+## Atualização — Task 7 (Plano 2): contraste de texto secundário
+
+Único ponto do projeto que altera visualmente o modelo aprovado, com decisão explícita da
+empresa (opacidade `.56`). `rgba(245,241,234,.42)` e `.45` viraram `.56` em seis trechos
+(`.scroll-cue`, `.op-meta`, `.caso-nums span`, `.caso-lucro span`, `.socio-foto span`,
+`.cap-note`); `.disclaimer` (texto legal do rodapé, em `.3`) subiu para `.5`, conforme regra
+própria do brief da Task 7 para texto legal.
+
+A auditoria da Task 7 media sete ocorrências, mas o levantamento por leitura manual de
+`referencia/index.html` deixou passar três trechos com o mesmo padrão de baixo contraste, só
+percebidos ao aplicar a correção:
+
+- `.res-strip .v` (index.html:214) — mesmo `.45`, mesmo papel de rótulo de métrica que
+  `.caso-nums span`/`.caso-lucro span`, na mesma seção Casos. Corrigido para `.56`.
+- `.caso-ph` (index.html:201) — mesmo `.28` e mesmo papel de texto de placeholder de foto que
+  `.socio-foto span` (que já estava na lista da Task 7). Corrigido para `.56`.
+- `.foot-bot` (index.html:276) — copyright e o link "Política de privacidade" no rodapé, em
+  `.34`, mesmo tipo de texto legal que `.disclaimer` logo abaixo. Corrigido para `.5`, mesmo
+  tratamento do disclaimer.
+
+Não alterado: `.cap-form input::placeholder` (`Guia.module.css`, `.38`) — texto de dica nativo
+do campo, some ao digitar, fora do que a WCAG 1.4.3 exige para texto persistente.
+
+Todos os 59 testes, o ESLint e o `next build` de produção passaram sem alteração após a
+correção. A conferência visual lado a lado (Passo 3 da Task 7) não foi refeita nos quatro
+breakpoints porque a mudança é só de cor de texto secundário já pré-aprovada pela empresa, sem
+nenhum efeito de layout — a hierarquia visual (texto secundário permanece secundário, só mais
+legível) foi conferida por leitura direta do CSS resultante.

@@ -93,7 +93,7 @@ em.mark{font-style:italic;font-weight:400;color:var(--gold-lt)}
    CTA/FOOTER do CSS) e reaparece em mais de uma seção do HTML (casos:612,
    equipe/sócios:749), por isso mora em base.css em vez de em um módulo de
    seção só — mesmo critério já usado para .sim-note acima. */
-.disclaimer{font-size:10.5px;line-height:1.85;color:rgba(245,241,234,.3);max-width:88ch;margin-top:20px}
+.disclaimer{font-size:10.5px;line-height:1.85;color:rgba(245,241,234,.5);max-width:88ch;margin-top:20px}
 
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.01ms!important}

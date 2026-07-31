@@ -21,7 +21,7 @@
 .foot-grid h4{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;font-weight:400}
 .foot-grid a,.foot-grid p{display:block;color:rgba(245,241,234,.58);font-size:.92rem;margin-bottom:10px;transition:color .25s}
 .foot-grid a:hover{color:var(--gold-lt)}
-.foot-bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;padding-top:28px;border-top:1px solid var(--line-d);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.34)}
+.foot-bot{display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;padding-top:28px;border-top:1px solid var(--line-d);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,241,234,.5)}
 
 @media(max-width:1080px){
   .foot-grid{grid-template-columns:1fr 1fr}
