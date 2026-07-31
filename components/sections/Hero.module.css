@@ -14,7 +14,7 @@
 .bignum div:last-child{border-right:0}
 .bignum .k{font-family:var(--serif);font-weight:500;font-size:clamp(1.6rem,3vw,2.5rem);line-height:1;color:var(--gold-lt)}
 .bignum .v{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,241,234,.5);margin-top:11px;font-weight:400}
-.scroll-cue{position:absolute;bottom:24px;right:var(--pad);z-index:3;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,234,.42);display:flex;align-items:center;gap:12px}
+.scroll-cue{position:absolute;bottom:24px;right:var(--pad);z-index:3;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:rgba(245,241,234,.56);display:flex;align-items:center;gap:12px}
 .scroll-cue i{display:block;width:1px;height:36px;background:linear-gradient(var(--gold),transparent);animation:cue 2.4s infinite}
 @keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
